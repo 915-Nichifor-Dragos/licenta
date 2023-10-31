@@ -1,0 +1,33 @@
+<div id="login-container" class="p-5">
+
+    <h6 class="text-center mb-5 fw-bold">Welcome to Hotel Management System, please <br> login!</h6>
+
+    <section id="login-content">
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <mat-form-field appearance="outline">
+                <mat-label>Username</mat-label>
+                <input matInput type="text" formControlName="username" id="username">
+              </mat-form-field>
+            </div>
+      
+            <div class="mb-3">
+              <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" formControlName="password" id="password">
+              </mat-form-field>
+            </div>
+      
+            <div class="row">
+                <a class="col btn btn-link register-button fw-bold py-2" routerLink="/register">Register</a>
+                <button type="submit" id="submit" class="col btn login-button fw-bold py-2">Login</button>
+            </div>
+          </form>
+
+        <hr class="mt-5">
+
+        <p class="text-center fw-light registration-info-text"> Registrations will be done only as a Client</p>
+
+    </section>
+</div>

@@ -1,0 +1,43 @@
+#login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.register-button {
+    color: teal
+}
+
+.register-button:hover {
+    color: teal;
+    opacity: 0.8;
+}
+
+.login-button {
+    color: white;
+    background-color: teal;
+}
+
+.login-button:hover {
+    color: white;
+    background-color: teal;
+    opacity: 0.8;
+}
+
+.register-anchor {
+    text-decoration: none;
+    color: teal;
+}
+
+.registration-info-text {
+    font-size: 12px;
+}
+
+#login-content {
+    min-width: 500px;
+}
+
+mat-form-field {
+    min-width: 100%;
+}

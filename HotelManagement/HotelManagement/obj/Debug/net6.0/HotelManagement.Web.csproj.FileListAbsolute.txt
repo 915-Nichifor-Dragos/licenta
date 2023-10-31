@@ -1,0 +1,6 @@
+C:\Users\user\Desktop\Licenta\HotelManagement\HotelManagement\obj\Debug\net6.0\HotelManagement.Web.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\Licenta\HotelManagement\HotelManagement\obj\Debug\net6.0\HotelManagement.Web.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Desktop\Licenta\HotelManagement\HotelManagement\obj\Debug\net6.0\HotelManagement.Web.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\Licenta\HotelManagement\HotelManagement\obj\Debug\net6.0\HotelManagement.Web.AssemblyInfo.cs
+C:\Users\user\Desktop\Licenta\HotelManagement\HotelManagement\obj\Debug\net6.0\HotelManagement.Web.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\Licenta\HotelManagement\HotelManagement\obj\Debug\net6.0\HotelManagement.Web.MvcApplicationPartsAssemblyInfo.cache

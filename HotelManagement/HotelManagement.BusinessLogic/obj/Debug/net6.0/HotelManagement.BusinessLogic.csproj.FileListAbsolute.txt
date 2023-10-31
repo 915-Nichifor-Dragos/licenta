@@ -1,0 +1,5 @@
+C:\Users\user\Desktop\Licenta\HotelManagement\HotelManagement.BusinessLogic\obj\Debug\net6.0\HotelManagement.BusinessLogic.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\Licenta\HotelManagement\HotelManagement.BusinessLogic\obj\Debug\net6.0\HotelManagement.BusinessLogic.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Desktop\Licenta\HotelManagement\HotelManagement.BusinessLogic\obj\Debug\net6.0\HotelManagement.BusinessLogic.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\Licenta\HotelManagement\HotelManagement.BusinessLogic\obj\Debug\net6.0\HotelManagement.BusinessLogic.AssemblyInfo.cs
+C:\Users\user\Desktop\Licenta\HotelManagement\HotelManagement.BusinessLogic\obj\Debug\net6.0\HotelManagement.BusinessLogic.csproj.CoreCompileInputs.cache
