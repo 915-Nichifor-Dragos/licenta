@@ -22,8 +22,8 @@ public class AuthenticationController : ControllerBase
         _userLogic = userLogic;
     }
 
-    [HttpGet("logged-user")]
-    public async Task<IActionResult> GetLoggedUser()
+    [HttpGet("logged-user-details")]
+    public async Task<IActionResult> GetLoggedUserDetails()
     {
         var user = await _userLogic.GetUserByUsername(User.Identity.Name);
 
@@ -33,6 +33,32 @@ public class AuthenticationController : ControllerBase
         }
 
         return Ok(UserConverter.FromUserToUserDetailsViewModel(user));
+    }
+
+    [HttpGet("logged-user-role")]
+    public async Task<IActionResult> GetLoggedUserRole()
+    {
+        var user = await _userLogic.GetUserByUsername(User.Identity.Name);
+
+        if (user == null)
+        {
+            return Ok(new {});
+        }
+
+        return Ok(new { user.Role.Name });
+    }
+
+    [HttpGet("logged-user-username")]
+    public async Task<IActionResult> GetLoggedUserUsername()
+    {
+        var user = await _userLogic.GetUserByUsername(User.Identity.Name);
+
+        if (user == null)
+        {
+            return Ok(new {});
+        }
+
+        return Ok(new { user.Username });
     }
 
     [HttpPost("activate")]
@@ -166,7 +192,7 @@ public class AuthenticationController : ControllerBase
         Response.Cookies.Append("hotel-management", "authentication-expired", new CookieOptions
         {
             Expires = DateTime.Now.AddDays(-1),
-            IsEssential = true  // Marks the cookie as essential
+            IsEssential = true
         });
 
 

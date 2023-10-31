@@ -4357,11 +4357,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user\\Desktop\\Licenta\\HotelManagement\\HotelManagement\\HotelManagement.Web.csproj",
+      "projectUniqueName": "C:\\Users\\user\\Desktop\\proiect_licenta\\HotelManagement\\HotelManagement\\HotelManagement.Web.csproj",
       "projectName": "HotelManagement.Web",
-      "projectPath": "C:\\Users\\user\\Desktop\\Licenta\\HotelManagement\\HotelManagement\\HotelManagement.Web.csproj",
+      "projectPath": "C:\\Users\\user\\Desktop\\proiect_licenta\\HotelManagement\\HotelManagement\\HotelManagement.Web.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user\\Desktop\\Licenta\\HotelManagement\\HotelManagement\\obj\\",
+      "outputPath": "C:\\Users\\user\\Desktop\\proiect_licenta\\HotelManagement\\HotelManagement\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4379,14 +4379,14 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\user\\Desktop\\Licenta\\HotelManagement\\HotelManagement.BusinessLogic\\HotelManagement.BusinessLogic.csproj": {
-              "projectPath": "C:\\Users\\user\\Desktop\\Licenta\\HotelManagement\\HotelManagement.BusinessLogic\\HotelManagement.BusinessLogic.csproj"
+            "C:\\Users\\user\\Desktop\\proiect_licenta\\HotelManagement\\HotelManagement.BusinessLogic\\HotelManagement.BusinessLogic.csproj": {
+              "projectPath": "C:\\Users\\user\\Desktop\\proiect_licenta\\HotelManagement\\HotelManagement.BusinessLogic\\HotelManagement.BusinessLogic.csproj"
             },
-            "C:\\Users\\user\\Desktop\\Licenta\\HotelManagement\\HotelManagement.DataAccess\\HotelManagement.DataAccess.csproj": {
-              "projectPath": "C:\\Users\\user\\Desktop\\Licenta\\HotelManagement\\HotelManagement.DataAccess\\HotelManagement.DataAccess.csproj"
+            "C:\\Users\\user\\Desktop\\proiect_licenta\\HotelManagement\\HotelManagement.DataAccess\\HotelManagement.DataAccess.csproj": {
+              "projectPath": "C:\\Users\\user\\Desktop\\proiect_licenta\\HotelManagement\\HotelManagement.DataAccess\\HotelManagement.DataAccess.csproj"
             },
-            "C:\\Users\\user\\Desktop\\Licenta\\HotelManagement\\HotelManagement.Models\\HotelManagement.Models.csproj": {
-              "projectPath": "C:\\Users\\user\\Desktop\\Licenta\\HotelManagement\\HotelManagement.Models\\HotelManagement.Models.csproj"
+            "C:\\Users\\user\\Desktop\\proiect_licenta\\HotelManagement\\HotelManagement.Models\\HotelManagement.Models.csproj": {
+              "projectPath": "C:\\Users\\user\\Desktop\\proiect_licenta\\HotelManagement\\HotelManagement.Models\\HotelManagement.Models.csproj"
             }
           }
         }

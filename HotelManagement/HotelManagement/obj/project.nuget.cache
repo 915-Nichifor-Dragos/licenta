@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IcNS0h529gCcW8iNzrMWASos0Iv5rrlTXLEVeeJgT3WWSNtbmea6T6oGjcs86uGMbQlTJ6w7yAEjpGgepq51ag==",
+  "dgSpecHash": "kIBqeksbrK5iSXshITltmEUfxpnI8R4DTtx74MSZABhwaTlSIVyN4zzTYdiaer7KLv7RZqLFeMOau6ebvIn2PA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\user\\Desktop\\Licenta\\HotelManagement\\HotelManagement\\HotelManagement.Web.csproj",
+  "projectFilePath": "C:\\Users\\user\\Desktop\\proiect_licenta\\HotelManagement\\HotelManagement\\HotelManagement.Web.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

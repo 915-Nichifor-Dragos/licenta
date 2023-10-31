@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/MI10luPWJZdRpFdTIG41nGJwE/EVLCpgpIKMnC4cYPo8b+0P0kwq+QhDcgRCGkW7qWdWT7+YfHtBAHtlKImAg==",
+  "dgSpecHash": "ehq1jLeG1ewVyN6FmxCzRdFZeTuCejFEY1JPQXRcr4QwqvKEvZLUm/4EXPyKPkMfEWTqAKPXTxq7BeMC5Y+hEQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\user\\Desktop\\Licenta\\HotelManagement\\HotelManagement.Models\\HotelManagement.Models.csproj",
+  "projectFilePath": "C:\\Users\\user\\Desktop\\proiect_licenta\\HotelManagement\\HotelManagement.Models\\HotelManagement.Models.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\bouncycastle.cryptography\\2.2.1\\bouncycastle.cryptography.2.2.1.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\filesignatures\\4.4.1\\filesignatures.4.4.1.nupkg.sha512",

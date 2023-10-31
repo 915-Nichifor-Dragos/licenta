@@ -2083,11 +2083,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user\\Desktop\\Licenta\\HotelManagement\\HotelManagement.Models\\HotelManagement.Models.csproj",
+      "projectUniqueName": "C:\\Users\\user\\Desktop\\proiect_licenta\\HotelManagement\\HotelManagement.Models\\HotelManagement.Models.csproj",
       "projectName": "HotelManagement.Models",
-      "projectPath": "C:\\Users\\user\\Desktop\\Licenta\\HotelManagement\\HotelManagement.Models\\HotelManagement.Models.csproj",
+      "projectPath": "C:\\Users\\user\\Desktop\\proiect_licenta\\HotelManagement\\HotelManagement.Models\\HotelManagement.Models.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user\\Desktop\\Licenta\\HotelManagement\\HotelManagement.Models\\obj\\",
+      "outputPath": "C:\\Users\\user\\Desktop\\proiect_licenta\\HotelManagement\\HotelManagement.Models\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -21,6 +21,7 @@ import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { SessionService } from './services/session.service';
 import { NavbarService } from './services/navbar.service';
+import { HomeComponent } from './components/home/home.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { NavbarService } from './services/navbar.service';
     RegisterComponent,
     LoginComponent,
     FooterComponent,
-    NavbarComponent
+    NavbarComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

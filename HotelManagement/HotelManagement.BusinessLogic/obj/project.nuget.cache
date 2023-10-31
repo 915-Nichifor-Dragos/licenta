@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1C9LKQ2vWz1j+G1mAgkyqhxxdZrR8IMG+onP3wR651F3tbMZ19V+iAMJrgRVSCbKZ33MDv/2qwtiCpzNBd/7xw==",
+  "dgSpecHash": "AMnv0J38B+YUmfs/M1bNGKkpMaa0m8yIyvfHacTVzxK5oTJXUxrhSJmwXvoAWz+l8+Tjs7LBwplyHllecVHGsg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\user\\Desktop\\Licenta\\HotelManagement\\HotelManagement.BusinessLogic\\HotelManagement.BusinessLogic.csproj",
+  "projectFilePath": "C:\\Users\\user\\Desktop\\proiect_licenta\\HotelManagement\\HotelManagement.BusinessLogic\\HotelManagement.BusinessLogic.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

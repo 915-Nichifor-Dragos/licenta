@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { SessionService } from './session.service'; 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, finalize, tap } from 'rxjs';
@@ -8,7 +8,11 @@ import { NavbarService } from './navbar.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService implements OnInit {
+
+  private userRole: string = "";
+  private username: string = "";
+  private baseUrl = 'https://localhost:7059/api';
 
   constructor(
     private sessionService: SessionService,
@@ -16,7 +20,32 @@ export class AuthService {
     private http: HttpClient
   ) { }
 
-  private baseUrl = 'https://localhost:7059/api';
+  ngOnInit(): void {
+    this.getUserUsername();
+    this.getUserRole();
+  }
+
+  private getUserUsername() {
+    this.fetchUserUsername().subscribe(
+      (username: string) => {
+        this.username = username;
+      },
+      (error) => {
+        console.error('Error fetching user roles', error);
+      }
+    );
+  }
+
+  private getUserRole(): void {
+    this.fetchUserRole().subscribe(
+      (role: string) => {
+        this.userRole = role;
+      },
+      (error) => {
+        console.error('Error fetching user roles', error);
+      }
+    );
+  }
 
   login(username: string, password: string): Observable<any> {
     const loginUrl = `${this.baseUrl}/auth/login`;
@@ -42,7 +71,6 @@ export class AuthService {
     );
   }
   
-
   logout(): Observable<any> {
     const logoutUrl = `${this.baseUrl}/auth/logout`;
 
@@ -59,8 +87,38 @@ export class AuthService {
     );
   }
 
+  fetchUserUsername(): Observable<string> {
+    return this.http.get<string>('api/auth/logged-user-username');
+  }
+
+  fetchUserRole(): Observable<string> {
+    return this.http.get<string>('/api/auth/logged-user-role');
+  }
+
+  hasRole(expectedRole: string): Observable<boolean> {
+    return new Observable<boolean>((observer) => {
+      if (this.userRole !== "") {
+        observer.next(this.userRole === expectedRole);
+        observer.complete();
+      } else {
+        this.fetchUserRole().subscribe(
+          (role: string) => {
+            this.userRole = role;
+            observer.next(this.userRole === expectedRole);
+            observer.complete();
+          },
+          (error) => {
+            console.error('Error fetching user roles', error);
+            observer.next(false);
+            observer.complete();
+          }
+        );
+      }
+    });
+  }
+
   isAuthenticated(): boolean {
-    return !! this.sessionService.getDecodedUserDetails();
+    return !!this.sessionService.getDecodedUserDetails();
   }
 
   getUserDetails(): any {
