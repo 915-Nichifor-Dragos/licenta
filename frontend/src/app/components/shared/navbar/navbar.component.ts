@@ -36,9 +36,6 @@ export class NavbarComponent implements OnDestroy {
         this.username = "";
         this.role = ""
       },
-      error: (error) => {
-        console.error('Error during logout:', error);
-      }
     });
   }
 }

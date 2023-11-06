@@ -32,7 +32,6 @@ export class AuthService{
   }
 
   updateClaims(): void {
-    console.log("reach update")
     this.fetchUserClaims().subscribe(
       (userClaims: UserClaim) => {
         this.userClaims.next(userClaims);
@@ -94,7 +93,7 @@ export class AuthService{
               observer.next(claims.role === expectedRole);
               observer.complete();
             },
-            (error) => {
+            () => {
               observer.next(false);
               observer.complete();
             }

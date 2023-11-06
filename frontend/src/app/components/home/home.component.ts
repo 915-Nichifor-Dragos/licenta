@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -7,7 +8,22 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  constructor(
-    private authService: AuthService
-    ) {}
+  username: string = ""
+  userDetailsSubscription: Subscription | undefined;
+
+  constructor(private authService: AuthService) {
+    this.userDetailsSubscription = this.authService.getUserClaims().subscribe(details => {
+      if (details) {
+        this.username = details.username;
+      } else {
+        this.username = '';
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.userDetailsSubscription) {
+      this.userDetailsSubscription.unsubscribe();
+    }
+  }
 }
