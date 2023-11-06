@@ -20,6 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
+import { RoleGuard } from './services/role-guard.service';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { HomeComponent } from './components/home/home.component';
   ],
   providers: [
     AuthService,
+    RoleGuard
   ],
   bootstrap: [AppComponent]
 })

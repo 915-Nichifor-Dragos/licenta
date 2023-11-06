@@ -35,6 +35,9 @@ export class AuthService{
     this.fetchUserClaims().subscribe(
       (userClaims: UserClaim) => {
         this.userClaims.next(userClaims);
+      },
+      (error: any) => {
+        
       }
     );
   }
@@ -80,26 +83,21 @@ export class AuthService{
     );
   }
 
-  hasRole(expectedRole: string): Observable<boolean> {
-    return new Observable<boolean>((observer) => {
-      this.userClaims.subscribe((claims) => {
-        if (claims.role != "") {
-          observer.next(claims.role === expectedRole);
-          observer.complete();
-        } else {
-          this.fetchUserClaims().subscribe(
-            (userClaims: UserClaim) => {
-              this.userClaims.next(userClaims);
-              observer.next(claims.role === expectedRole);
-              observer.complete();
-            },
-            () => {
-              observer.next(false);
-              observer.complete();
-            }
-          );
-        }
-      });
-    });
+  async hasRole(expectedRole: string): Promise<boolean> {
+    const claims = this.userClaims.getValue();
+
+    if (claims.role !== '') {
+      return claims.role === expectedRole;
+    } else {
+      try {
+        const userClaims = await this.fetchUserClaims().toPromise();
+        this.userClaims.next(userClaims!);
+
+        return userClaims!.role === expectedRole;
+      } catch (error) {
+        return false;
+      }
+    }
   }
+
 }

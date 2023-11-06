@@ -16,14 +16,27 @@ export class RoleGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const expectedRole = next.data['expectedRole'];
+    const expectedRoles = next.data['expectedRoles'];
 
-    if (this.authService.hasRole(expectedRole)) {
-      return true;
-    } else {
-      this.router.navigate(['/unauthorized']);
+    const roleChecks = expectedRoles.map((role: string | null) => {
+        if (role === null) {
+          return false;
+        } else {
+          return this.authService.hasRole(role);
+        }
+    });      
 
+    return Promise.all(roleChecks).then(results => {
+      const hasAtLeastOneRole = results.some(result => result === true);
+      if (hasAtLeastOneRole) {
+        return true;
+      } else {
+        this.router.navigate(['/login']); // Navigate to unauthorized or any other appropriate route
+        return false;
+      }
+    }).catch(error => {
+      console.error('Error occurred while checking role:', error);
       return false;
-    }
+    });
   }
 }
