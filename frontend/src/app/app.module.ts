@@ -19,8 +19,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
-import { SessionService } from './services/session.service';
-import { NavbarService } from './services/navbar.service';
 import { HomeComponent } from './components/home/home.component';
 
 
@@ -54,8 +52,6 @@ import { HomeComponent } from './components/home/home.component';
   ],
   providers: [
     AuthService,
-    SessionService,
-    NavbarService
   ],
   bootstrap: [AppComponent]
 })

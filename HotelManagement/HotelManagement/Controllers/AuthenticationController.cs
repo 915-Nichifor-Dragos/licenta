@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using HotelManagement.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HotelManagement.Web.Controllers;
 
@@ -22,43 +23,122 @@ public class AuthenticationController : ControllerBase
         _userLogic = userLogic;
     }
 
-    [HttpGet("logged-user-details")]
-    public async Task<IActionResult> GetLoggedUserDetails()
+    [HttpGet("logged-user-claims")]
+    public IActionResult GetLoggedUserClaims()
     {
-        var user = await _userLogic.GetUserByUsername(User.Identity.Name);
+        var claims = User.Claims;
 
-        if (user == null)
+        var usernameClaim = claims
+            .FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+
+        var roleClaim = claims
+            .FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+
+        if (string.IsNullOrEmpty(usernameClaim) || string.IsNullOrEmpty(roleClaim))
         {
-            return BadRequest("Something went wrong");
+            return Ok(new
+            {
+                Username = "",
+                Role = ""
+            });
         }
 
-        return Ok(UserConverter.FromUserToUserDetailsViewModel(user));
+        return Ok(new
+        {
+            Username = usernameClaim,
+            Role = roleClaim
+        });
     }
 
-    [HttpGet("logged-user-role")]
-    public async Task<IActionResult> GetLoggedUserRole()
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] LoginViewModel loginViewModel)
     {
-        var user = await _userLogic.GetUserByUsername(User.Identity.Name);
+        IEnumerable<ValidationResult> validationResults = loginViewModel.Validate();
+
+        if (validationResults.Any())
+        {
+            return BadRequest(new
+            {
+                Success = false,
+                Message = "Invalid model: username or password missing"
+            });
+        }
+
+        if (!await _userLogic.IsValidLogin(loginViewModel))
+        {
+            return BadRequest(new
+            {
+                Success = false,
+                Message = "Username or password are incorrect"
+            });
+        }
+
+        var user = await _userLogic.GetUserByUsername(loginViewModel.Username);
 
         if (user == null)
         {
-            return Ok(new {});
+            return BadRequest(new 
+            { 
+                Success = false, 
+                Message = "Something went wrong" 
+            });
         }
 
-        return Ok(new { user.Role.Name });
+        if (user.IsActive == false)
+        {
+            return BadRequest(new
+            {
+                Success = false,
+                Message = "Please activate your account"
+            });
+        }
+
+        var claims = new List<Claim>
+        {
+            new Claim(type: ClaimTypes.Name, value: user.Username),
+            new Claim(type: ClaimTypes.Role, value: user.Role.Name.ToString()),
+        };
+
+        var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+        await HttpContext.SignInAsync(
+            CookieAuthenticationDefaults.AuthenticationScheme, 
+            new ClaimsPrincipal(identity),
+            new AuthenticationProperties
+            {
+                IsPersistent = true,
+                AllowRefresh = true,
+                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(120)
+            });
+
+        //Response.Cookies.Append("HotelManagement", user.Id.ToString(), new CookieOptions
+        //{
+        //    HttpOnly = true,
+        //    Secure = true,
+        //    SameSite = SameSiteMode.None,
+        //    Expires = DateTimeOffset.UtcNow.AddMinutes(120)
+        //});
+
+        return Ok(new
+        {
+            Success = true,
+            Message = "Signed in successfully"
+        });
     }
 
-    [HttpGet("logged-user-username")]
-    public async Task<IActionResult> GetLoggedUserUsername()
+    [HttpPost("logout")]
+    public async Task<IActionResult> Logout()
     {
-        var user = await _userLogic.GetUserByUsername(User.Identity.Name);
+        await HttpContext.SignOutAsync(
+               CookieAuthenticationDefaults.AuthenticationScheme);
 
-        if (user == null)
-        {
-            return Ok(new {});
-        }
+        //Response.Cookies.Append("HotelManagement", "removed", new CookieOptions
+        //{
+        //    Expires = DateTime.Now.AddDays(-1),
+        //    IsEssential = true
+        //});
 
-        return Ok(new { user.Username });
+        return Ok();
     }
 
     [HttpPost("activate")]
@@ -122,80 +202,5 @@ public class AuthenticationController : ControllerBase
         }
 
         return BadRequest("Your account was not validated. Please try again!");
-    }
-
-    [HttpPost("login")]
-    public async Task<IActionResult> Login(LoginViewModel loginViewModel)
-    {
-        IEnumerable<ValidationResult> validationResults = loginViewModel.Validate();
-
-        if (validationResults.Any())
-        {
-            return BadRequest("Invalid user entry");
-        }
-
-        if (!await _userLogic.IsValidLogin(loginViewModel))
-        {
-            return BadRequest("Username or password are incorrect");
-        }
-
-        var user = await _userLogic.GetUserByUsername(loginViewModel.Username);
-
-        if (user == null)
-        {
-            return BadRequest("Something went wrong");
-        }
-
-        if (user.IsActive == false)
-        {
-            return BadRequest("Please activate your account");
-        }
-
-        var claims = new List<Claim>
-        {
-            new Claim(ClaimTypes.Name, user.Username),
-            new Claim(ClaimTypes.Role, user.Role.Name.ToString()),
-        };
-
-        var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-        var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
-
-        var authProperties = new AuthenticationProperties
-        {
-            IssuedUtc = DateTimeOffset.UtcNow,
-            ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(120),
-        };
-
-        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal, authProperties);
-
-        Response.Cookies.Append("hotel-management", "authentication-cookie", new CookieOptions
-        {
-            HttpOnly = true,
-            Secure = true,
-            SameSite = SameSiteMode.None,
-            Expires = DateTimeOffset.UtcNow.AddMinutes(120)
-        });
-
-        return Ok(new LoginDTO 
-        { 
-            Username = user.Username,
-            Role = user.Role.Name,
-        } );
-    }
-
-    [HttpPost("logout")]
-    public async Task<IActionResult> Logout()
-    {
-        await HttpContext.SignOutAsync(
-               CookieAuthenticationDefaults.AuthenticationScheme);
-
-        Response.Cookies.Append("hotel-management", "authentication-expired", new CookieOptions
-        {
-            Expires = DateTime.Now.AddDays(-1),
-            IsEssential = true
-        });
-
-
-        return Ok();
     }
 }

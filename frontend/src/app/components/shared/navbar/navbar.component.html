@@ -5,12 +5,12 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-item" routerLink="#" *ngIf="authenticatedUser">{{authenticatedUser.username}}</a>
-        <a class="nav-item" routerLink="#" *ngIf="authenticatedUser?.role == '2' || authenticatedUser?.role == '3'">Hotel Management</a>
-        <a class="nav-item" routerLink="#" *ngIf="authenticatedUser?.role == '2' || authenticatedUser?.role == '3'">User Management</a>
-        <a class="nav-item" routerLink="#" *ngIf="authenticatedUser?.role == '0'">Bookings</a>
-        <a class="nav-item" routerLink="login" *ngIf="!authenticatedUser">Login</a>
-        <a class="nav-item" routerLink="login" (click)="logout()" *ngIf="authenticatedUser">Logout</a>
+        <a class="nav-item" routerLink="#" *ngIf="this.username && this.role">{{this.username}}</a>
+        <a class="nav-item" routerLink="#" *ngIf="this.role == 'Owner' || this.role == 'Manager'">Hotel Management</a>
+        <a class="nav-item" routerLink="#" *ngIf="this.role == 'Owner' || this.role == 'Manager'">User Management</a>
+        <a class="nav-item" routerLink="#" *ngIf="this.role == 'Client'">Bookings</a>
+        <a class="nav-item" routerLink="login" *ngIf="!this.username && !this.role">Login</a>
+        <a class="nav-item" routerLink="login" (click)="logout()" *ngIf="this.username && this.role">Logout</a>
       </div>
     </div>
 </nav>
