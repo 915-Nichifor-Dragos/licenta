@@ -55,4 +55,22 @@ public class UserConverter
             TokenGenerationTime = user.TokenGenerationTime,
         };
     }
+    
+    public static User FromUserRegisterViewModelToUser(RegisterViewModel user, int roleId)
+    {
+        return new User
+        {
+            Username = user.Username,
+            Password = PasswordEncrypter.Hash(user.Password),
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            Email = user.Email,
+            BirthDate = user.BirthDate,
+            Gender = user.Gender,
+            RoleId = roleId,
+            Address = user.Address,
+            Bio = user.Bio,
+
+        };
+    }
 }

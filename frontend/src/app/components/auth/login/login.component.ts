@@ -31,10 +31,12 @@ export class LoginComponent implements OnInit {
       const usernameControl = this.loginForm.get('username')!;
       const passwordControl = this.loginForm.get('password')!;
 
-    const usernameValue = usernameControl.value;
-    const passwordValue = passwordControl.value;
+      const userData = {
+        username: usernameControl.value,
+        password: passwordControl.value
+      };
 
-      this.authService.login(usernameValue, passwordValue).subscribe(
+      this.authService.login(userData).subscribe(
         (response: any) => {
           this.toastrService.success('Log in was successful');
           this.router.navigate(['/home']);

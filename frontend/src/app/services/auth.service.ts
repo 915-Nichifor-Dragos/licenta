@@ -42,13 +42,8 @@ export class AuthService{
     );
   }
 
-  login(username: string, password: string): Observable<any> {
+  login(userData: any): Observable<any> {
     const loginUrl = `${this.baseUrl}/auth/login`;
-  
-    const credentials = {
-      username: username,
-      password: password
-    };
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -57,7 +52,7 @@ export class AuthService{
       withCredentials: true
     };
   
-    return this.http.post<any>(loginUrl, credentials, httpOptions).pipe(
+    return this.http.post<any>(loginUrl, userData, httpOptions).pipe(
       tap((response: any) => {
         if (response.success) {
           this.updateClaims();
@@ -81,6 +76,19 @@ export class AuthService{
         this.updateClaims();
       })
     );
+  }
+
+  register(userData: any): Observable<any> {
+    const registerUrl = `${this.baseUrl}/auth/register`;
+    
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      withCredentials: true
+    };
+
+    return this.http.post(registerUrl, userData, httpOptions);
   }
 
   async hasRole(expectedRole: string): Promise<boolean> {

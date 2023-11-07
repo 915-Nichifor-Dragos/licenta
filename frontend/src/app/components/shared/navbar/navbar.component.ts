@@ -32,7 +32,7 @@ export class NavbarComponent implements OnDestroy {
 
   logout(): void {
     this.authService.logout().subscribe({
-      next: () => {
+      next: (response) => {
         this.username = "";
         this.role = ""
       },

@@ -7,8 +7,6 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
-using HotelManagement.Models.DTOs;
-using Microsoft.AspNetCore.Authorization;
 
 namespace HotelManagement.Web.Controllers;
 
@@ -111,14 +109,6 @@ public class AuthenticationController : ControllerBase
                 ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(120)
             });
 
-        //Response.Cookies.Append("HotelManagement", user.Id.ToString(), new CookieOptions
-        //{
-        //    HttpOnly = true,
-        //    Secure = true,
-        //    SameSite = SameSiteMode.None,
-        //    Expires = DateTimeOffset.UtcNow.AddMinutes(120)
-        //});
-
         return Ok(new
         {
             Success = true,
@@ -131,12 +121,6 @@ public class AuthenticationController : ControllerBase
     {
         await HttpContext.SignOutAsync(
                CookieAuthenticationDefaults.AuthenticationScheme);
-
-        //Response.Cookies.Append("HotelManagement", "removed", new CookieOptions
-        //{
-        //    Expires = DateTime.Now.AddDays(-1),
-        //    IsEssential = true
-        //});
 
         return Ok();
     }
@@ -171,11 +155,11 @@ public class AuthenticationController : ControllerBase
     }
 
     [HttpPost("register")]
-    public async Task<IActionResult> Register(UserViewModel userViewModel)
+    public async Task<IActionResult> Register([FromBody] RegisterViewModel registerViewModel)
     {
-        IEnumerable<ValidationResult> validationResults = userViewModel.Validate();
+        IEnumerable<ValidationResult> validationResults = registerViewModel.Validate();
 
-        var user = UserConverter.FromUserViewModelToUser(userViewModel, 1);
+        var user = UserConverter.FromUserRegisterViewModelToUser(registerViewModel, 1);
 
         if (!validationResults.Any())
         {
@@ -191,14 +175,14 @@ public class AuthenticationController : ControllerBase
                 return BadRequest("Username is already in use");
             }
 
-            user.ImageUrl = await _userLogic.UploadProfilePicture(userViewModel.ProfilePicture);
+            // user.ImageUrl = await _userLogic.UploadProfilePicture(registerViewModel.ProfilePicture);
 
             string host = HttpContext.Request.Host.Host;
             int port = HttpContext.Request.Host.Port ?? 80;
 
             await _userLogic.CreateUser(user, host, port);
 
-            return Ok("Your account was created");
+            return Ok();
         }
 
         return BadRequest("Your account was not validated. Please try again!");
