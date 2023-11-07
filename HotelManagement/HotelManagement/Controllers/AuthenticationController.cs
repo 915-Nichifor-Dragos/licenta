@@ -125,7 +125,7 @@ public class AuthenticationController : ControllerBase
         return Ok();
     }
 
-    [HttpPost("activate")]
+    [HttpPost("activate")] // to be tested
     public async Task<IActionResult> Activate(ActivateViewModel model)
     {
         var emailValidityOutcomes = await _userLogic.ActivateAccount(model.Email, model.Token);
@@ -140,7 +140,7 @@ public class AuthenticationController : ControllerBase
         };
     }
 
-    [HttpPost("resend-confirmation")]
+    [HttpPost("resend-confirmation")] // to be tested
     public async Task<IActionResult> ResendConfirmationEmail(string email)
     {
         var host = HttpContext.Request.Host.Host;

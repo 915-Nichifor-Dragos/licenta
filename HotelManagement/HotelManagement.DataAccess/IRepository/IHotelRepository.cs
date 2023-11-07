@@ -15,6 +15,6 @@ public interface IHotelRepository
     Task AddUserToHotel(Hotel hotel, User user);
     Task<int> GetNextHotelRoomNumber(Guid hotelId);
     Task<List<Hotel>> GetAvailableHotels(DateTime startDate, DateTime endDate);
-    Task<IEnumerable<Hotel>>GetHotelsByName(int takeCount, User authenticatedUser, string name);
+    Task<IEnumerable<Hotel>>GetHotelsBySubstringAndCount(int takeCount, User authenticatedUser, string name);
     Task<List<Hotel>> GetByListId(List<Guid> hotelIds);
 }

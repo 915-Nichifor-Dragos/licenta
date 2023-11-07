@@ -30,9 +30,9 @@ public class HotelLogic : IHotelLogic
         return await _repository.GetHotels(count, user);
     }
 
-    public async Task<IEnumerable<Hotel>> GetHotelsByName(int takeCount, User authenticatedUser, string name)
+    public async Task<IEnumerable<Hotel>> GetHotelsBySubstringAndCount(int takeCount, User authenticatedUser, string name)
     {
-        return await _repository.GetHotelsByName(takeCount, authenticatedUser, name);
+        return await _repository.GetHotelsBySubstringAndCount(takeCount, authenticatedUser, name);
     }
 
     //public async Task<PaginatedList<HotelInfo>> GetHotelsByOwner(User user, int pageIndex, int pageSize, string sortParam, bool sortingOrder)

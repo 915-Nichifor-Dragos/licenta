@@ -5,19 +5,16 @@ namespace HotelManagement.BusinessLogic.Converters;
 
 public class UserConverter
 {
-    public static UserDetailsViewModel FromUserToUserDetailsViewModel(User user)
+    public static UserManagementUserViewModel FromUserToUserManagementUserViewModel(User user, DateTime registrationDate)
     {
-        return new UserDetailsViewModel()
+        return new UserManagementUserViewModel()
         {
-            Username = user.Username,
             FirstName = user.FirstName,
             LastName = user.LastName,
+            RoleName = user.Role.Name.ToString(),
             Email = user.Email,
             BirthDate = DateOnly.FromDateTime(user.BirthDate),
-            Gender = user.Gender,
-            Address = user.Address,
-            Bio = user.Bio,
-            Role = user.Role.Name,
+            RegistrationDate = DateOnly.FromDateTime(registrationDate)
         };
     }
 
@@ -27,11 +24,11 @@ public class UserConverter
         {
             Id = user.Id,
             FirstName = user.FirstName,
-            LastName = user.LastName,
             Email = user.Email,
             Gender = user.Gender,
             Address = user.Address,
             Bio = user.Bio,
+            LastName = user.LastName,
         };
     }
 

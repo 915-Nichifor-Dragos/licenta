@@ -278,25 +278,61 @@ public class UserLogic : IUserLogic
         return _driveOptions.DefaultProfilePicture;
     }
 
-    //public async Task<PaginatedList<UserDetailsViewModel>> GetByHotelId(Guid hotelId, UserListingSortType sortAttribute, bool isAscending, bool isOwner, int pageSize, int pageIndex)
-    //{
-    //    var tupleItemsUsersAndCount = await _userRepository.GetByHotelId(hotelId, sortAttribute, isAscending, isOwner, pageSize, pageIndex);
+    public async Task<PaginatedList<UserManagementUserViewModel>> GetByHotelId(
+        Guid hotelId,
+        UserListingSortType sortAttribute, 
+        bool isAscending, 
+        bool isOwner, 
+        int pageSize, 
+        int pageIndex)
+    {
+        var tupleItemsUsersAndCount = await _userRepository.GetByHotelId(
+            hotelId,
+            sortAttribute, 
+            isAscending,
+            isOwner, 
+            pageSize, 
+            pageIndex);
 
-    //    var usersToSendInView = tupleItemsUsersAndCount.Item1.Select(u => UserToUserDetailsViewModelConverter.ConvertUser(u, u.UserHotels.First().RegistrationDate)).ToList();
-    //    var count = tupleItemsUsersAndCount.Item2;
+        var usersToSendInView = tupleItemsUsersAndCount.Item1
+            .Select(u => UserConverter.FromUserToUserManagementUserViewModel(u, u.UserHotels.First().RegistrationDate))
+            .ToList();
+        var count = tupleItemsUsersAndCount.Item2;
 
-    //    return new PaginatedList<UserDetailsViewModel>(usersToSendInView, count, pageIndex, pageSize, sortAttribute.ToString(), isAscending);
-    //}
+        return new PaginatedList<UserManagementUserViewModel>(
+            usersToSendInView,
+            count, 
+            pageIndex,
+            pageSize,
+            sortAttribute.ToString(),
+            isAscending);
+    }
 
-    //public async Task<PaginatedList<UserDetailsViewModel>> GetAll(UserListingSortType sortAttribute, bool isAscending, User user, int pageSize, int pageIndex)
-    //{
-    //    var tupleItemsUsersAndCount = await _userRepository.GetAll(sortAttribute, isAscending, user, pageSize, pageIndex);
+    public async Task<PaginatedList<UserManagementUserViewModel>> GetAll(
+        UserListingSortType sortAttribute, 
+        bool isAscending, User user, 
+        int pageSize, 
+        int pageIndex)
+    {
+        var tupleItemsUsersAndCount = await _userRepository.GetAll(
+            sortAttribute,
+            isAscending,
+            user, pageSize, 
+            pageIndex);
 
-    //    var usersToSendInView = tupleItemsUsersAndCount.Item1.Select(u => UserToUserDetailsViewModelConverter.ConvertUser(u, u.UserHotels.First().RegistrationDate)).ToList();
-    //    var count = tupleItemsUsersAndCount.Item2;
+        var usersToSendInView = tupleItemsUsersAndCount.Item1
+            .Select(u => UserConverter.FromUserToUserManagementUserViewModel(u, u.UserHotels.First().RegistrationDate))
+            .ToList();
+        var count = tupleItemsUsersAndCount.Item2;
 
-    //    return new PaginatedList<UserDetailsViewModel>(usersToSendInView, count, pageIndex, pageSize, sortAttribute.ToString(), isAscending);
-    //}
+        return new PaginatedList<UserManagementUserViewModel>(
+            usersToSendInView, 
+            count, 
+            pageIndex,
+            pageSize,
+            sortAttribute.ToString(), 
+            isAscending);
+    }
 
     public void UpdateUserRole(User user, int roleId)
     {

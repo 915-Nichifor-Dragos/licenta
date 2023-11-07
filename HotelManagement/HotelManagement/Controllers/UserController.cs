@@ -1,8 +1,12 @@
 using HotelManagement.BusinessLogic.ILogic;
+using HotelManagement.BusinessLogic.Logic;
+using HotelManagement.Models.Constants;
 using HotelManagement.Models.ViewModels;
+using HotelManagement.Web.Authorize;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
 
 namespace HotelManagement.Web.Controllers;
 
@@ -12,11 +16,64 @@ namespace HotelManagement.Web.Controllers;
 public class UserController : ControllerBase{
     private readonly IUserLogic _userLogic;
     private readonly IRoleLogic _roleLogic;
+    private readonly IHotelLogic _hotelLogic;
 
-    public UserController(IUserLogic userLogic, IRoleLogic roleLogic)
+    public UserController(IUserLogic userLogic, IRoleLogic roleLogic, IHotelLogic hotelLogic)
     {
         _userLogic = userLogic;
         _roleLogic = roleLogic;
+        _hotelLogic = hotelLogic;
+    }
+
+    [HttpGet("subordinates")]
+    [AuthorizeRoles(Role.Manager, Role.Owner)]
+    public async Task<ActionResult> GetAllSubordinates(
+        UserListingSortType sortAttribute, 
+        bool isAscending, 
+        int? pageSize, 
+        int? pageIndex)
+    {
+        var authenticatedUsername = User.FindFirst(ClaimTypes.Name).Value;
+        var authenticatedUser = await _userLogic.GetUserByUsernameWithHotels(authenticatedUsername);
+
+        if (authenticatedUser == null)
+        {
+            return BadRequest();
+        }
+
+        var paginatedList = await _userLogic.GetAll(
+            sortAttribute, 
+            isAscending, 
+            authenticatedUser, 
+            pageSize ?? 5, 
+            pageIndex ?? 1);
+
+        return Ok(paginatedList);
+    }
+
+    [HttpGet("subordinates/{hotelId}")]
+    [AuthorizeRoles(Role.Manager, Role.Owner)]
+    public async Task<ActionResult> GetUsersByHotel(
+        Guid hotelId,
+        UserListingSortType sortAttribute, 
+        bool isAscending,
+        int? pageSize,
+        int? pageIndex)
+    {
+        var hotel = await _hotelLogic.GetById(hotelId);
+
+        if (hotel != null)
+        {
+            var paginatedList = await _userLogic.GetByHotelId(
+                hotelId,
+                sortAttribute,
+                isAscending, 
+                User.IsInRole(Role.Owner.ToString()), pageSize ?? 5, pageIndex ?? 1);
+
+            return Ok(paginatedList);
+        }
+
+        return BadRequest();
     }
 
     [HttpPut]
