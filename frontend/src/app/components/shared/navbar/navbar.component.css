@@ -28,3 +28,11 @@
 .nav-item:hover {
     color: teal;
 }
+
+.nav-username {
+    color: teal;
+    align-items: center;
+    text-decoration: none;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}

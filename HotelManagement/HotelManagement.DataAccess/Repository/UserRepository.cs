@@ -149,43 +149,23 @@ public class UserRepository : AbstractRepository<User>, IUserRepository
                         .ThenInclude(uh => uh.Hotel)
                         .AsQueryable();
 
-        switch (sortAttribute)
+        query = sortAttribute switch
         {
-            case UserListingSortType.FirstName:
-                query = isAscending ? query.OrderBy(u => u.FirstName)
-                    : query.OrderByDescending(u => u.FirstName);
-                break;
-
-            case UserListingSortType.LastName:
-                query = isAscending ? query.OrderBy(u => u.LastName)
-                    : query.OrderByDescending(u => u.LastName);
-                break;
-
-            case UserListingSortType.Email:
-                query = isAscending ? query.OrderBy(u => u.Email)
-                    : query.OrderByDescending(u => u.Email);
-                break;
-
-            case UserListingSortType.RegistrationDate:
-                query = isAscending ? query.OrderBy(u => u.UserHotels.FirstOrDefault().RegistrationDate)
-        : query.OrderByDescending(u => u.UserHotels.FirstOrDefault().RegistrationDate);
-                break;
-
-            case UserListingSortType.BirthDate:
-                query = isAscending ? query.OrderBy(u => u.BirthDate)
-                    : query.OrderByDescending(u => u.BirthDate);
-                break;
-
-            case UserListingSortType.Role:
-                query = isAscending ? query.OrderBy(u => u.Role)
-                    : query.OrderByDescending(u => u.Role);
-                break;
-
-            default:
-                query = isAscending ? query.OrderBy(u => u.Username)
-                     : query.OrderByDescending(u => u.Username);
-                break;
-        }
+            UserListingSortType.FirstName => isAscending ? query.OrderBy(u => u.FirstName)
+                                : query.OrderByDescending(u => u.FirstName),
+            UserListingSortType.LastName => isAscending ? query.OrderBy(u => u.LastName)
+                                : query.OrderByDescending(u => u.LastName),
+            UserListingSortType.Email => isAscending ? query.OrderBy(u => u.Email)
+                                : query.OrderByDescending(u => u.Email),
+            UserListingSortType.RegistrationDate => isAscending ? query.OrderBy(u => u.UserHotels.FirstOrDefault().RegistrationDate)
+                    : query.OrderByDescending(u => u.UserHotels.FirstOrDefault().RegistrationDate),
+            UserListingSortType.BirthDate => isAscending ? query.OrderBy(u => u.BirthDate)
+                                : query.OrderByDescending(u => u.BirthDate),
+            UserListingSortType.Role => isAscending ? query.OrderBy(u => u.Role)
+                                : query.OrderByDescending(u => u.Role),
+            _ => isAscending ? query.OrderBy(u => u.Username)
+                                 : query.OrderByDescending(u => u.Username),
+        };
 
         var totalUserCount = await query.CountAsync();
         var items = await query.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();

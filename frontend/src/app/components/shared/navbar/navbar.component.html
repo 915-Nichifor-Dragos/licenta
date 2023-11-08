@@ -5,9 +5,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-item" routerLink="#" *ngIf="this.username && this.role">{{this.username}}</a>
+        <a class="nav-username fw-bold" routerLink="#" *ngIf="this.username && this.role">{{this.username}}</a>
         <a class="nav-item" routerLink="#" *ngIf="this.role == 'Owner' || this.role == 'Manager'">Hotel Management</a>
-        <a class="nav-item" routerLink="#" *ngIf="this.role == 'Owner' || this.role == 'Manager'">User Management</a>
+        <a class="nav-item" routerLink="user-management" *ngIf="this.role == 'Owner' || this.role == 'Manager'">User Management</a>
         <a class="nav-item" routerLink="#" *ngIf="this.role == 'Client'">Bookings</a>
         <a class="nav-item" routerLink="login" *ngIf="!this.username && !this.role">Login</a>
         <a class="nav-item" routerLink="login" (click)="logout()" *ngIf="this.username && this.role">Logout</a>

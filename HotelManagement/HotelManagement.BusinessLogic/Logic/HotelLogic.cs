@@ -30,7 +30,7 @@ public class HotelLogic : IHotelLogic
         return await _repository.GetHotels(count, user);
     }
 
-    public async Task<IEnumerable<Hotel>> GetHotelsBySubstringAndCount(int takeCount, User authenticatedUser, string name)
+    public async Task<IEnumerable<Hotel>> GetHotelsBySubstringAndCount(int takeCount, User authenticatedUser, string? name)
     {
         return await _repository.GetHotelsBySubstringAndCount(takeCount, authenticatedUser, name);
     }

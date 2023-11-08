@@ -11,8 +11,8 @@ public interface IUserLogic
     Task<User?> GetUserByUsernameWithHotels(string username);
     Task<DateTime> GetRegistrationDate(Guid hotelId, Guid userId);
     Task<User> GetUserByEmail(string email);
-    Task<PaginatedList<UserManagementUserViewModel>> GetByHotelId(Guid hotelId, UserListingSortType sortAttribute, bool isAscending, bool isOwner, int pageSize, int pageIndex);
-    Task<PaginatedList<UserManagementUserViewModel>> GetAll(UserListingSortType sortAttribute, bool isAscending, User user, int pageSize, int pageIndex);
+    Task<(List<UserManagementUserViewModel>, int count)> GetByHotelId(Guid hotelId, UserListingSortType sortAttribute, bool isAscending, bool isOwner, int pageSize, int pageIndex);
+    Task<(List<UserManagementUserViewModel>, int count)> GetAll(UserListingSortType sortAttribute, bool isAscending, User user, int pageSize, int pageIndex);
     public UserValidityOutcomes CheckValidity(User user);
     public Task<UserValidityOutcomes> CheckEmailUniqueness(string email);
     public string CheckAge(string birthDate);

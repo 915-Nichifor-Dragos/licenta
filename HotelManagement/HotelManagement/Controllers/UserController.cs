@@ -1,5 +1,4 @@
 using HotelManagement.BusinessLogic.ILogic;
-using HotelManagement.BusinessLogic.Logic;
 using HotelManagement.Models.Constants;
 using HotelManagement.Models.ViewModels;
 using HotelManagement.Web.Authorize;
@@ -48,12 +47,18 @@ public class UserController : ControllerBase{
             pageSize ?? 5, 
             pageIndex ?? 1);
 
-        return Ok(paginatedList);
+        var result = new UserManagementPaginator
+        {
+            Users = paginatedList.Item1,
+            Count = paginatedList.Item2
+        };
+
+        return Ok(result);
     }
 
     [HttpGet("subordinates/{hotelId}")]
     [AuthorizeRoles(Role.Manager, Role.Owner)]
-    public async Task<ActionResult> GetUsersByHotel(
+    public async Task<ActionResult> GetSubordinatesByHotelId(
         Guid hotelId,
         UserListingSortType sortAttribute, 
         bool isAscending,
@@ -70,7 +75,13 @@ public class UserController : ControllerBase{
                 isAscending, 
                 User.IsInRole(Role.Owner.ToString()), pageSize ?? 5, pageIndex ?? 1);
 
-            return Ok(paginatedList);
+            var result = new UserManagementPaginator
+            {
+                Users = paginatedList.Item1,
+                Count = paginatedList.Item2
+            };
+
+            return Ok(result);
         }
 
         return BadRequest();

@@ -278,7 +278,7 @@ public class UserLogic : IUserLogic
         return _driveOptions.DefaultProfilePicture;
     }
 
-    public async Task<PaginatedList<UserManagementUserViewModel>> GetByHotelId(
+    public async Task<(List<UserManagementUserViewModel>, int)> GetByHotelId(
         Guid hotelId,
         UserListingSortType sortAttribute, 
         bool isAscending, 
@@ -299,16 +299,10 @@ public class UserLogic : IUserLogic
             .ToList();
         var count = tupleItemsUsersAndCount.Item2;
 
-        return new PaginatedList<UserManagementUserViewModel>(
-            usersToSendInView,
-            count, 
-            pageIndex,
-            pageSize,
-            sortAttribute.ToString(),
-            isAscending);
+        return (usersToSendInView, count);
     }
 
-    public async Task<PaginatedList<UserManagementUserViewModel>> GetAll(
+    public async Task<(List<UserManagementUserViewModel>, int count)> GetAll(
         UserListingSortType sortAttribute, 
         bool isAscending, User user, 
         int pageSize, 
@@ -325,13 +319,7 @@ public class UserLogic : IUserLogic
             .ToList();
         var count = tupleItemsUsersAndCount.Item2;
 
-        return new PaginatedList<UserManagementUserViewModel>(
-            usersToSendInView, 
-            count, 
-            pageIndex,
-            pageSize,
-            sortAttribute.ToString(), 
-            isAscending);
+        return (usersToSendInView, count);
     }
 
     public void UpdateUserRole(User user, int roleId)

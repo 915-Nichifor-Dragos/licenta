@@ -11,7 +11,7 @@ public class UserConverter
         {
             FirstName = user.FirstName,
             LastName = user.LastName,
-            RoleName = user.Role.Name.ToString(),
+            Role = user.Role.Name.ToString(),
             Email = user.Email,
             BirthDate = DateOnly.FromDateTime(user.BirthDate),
             RegistrationDate = DateOnly.FromDateTime(registrationDate)

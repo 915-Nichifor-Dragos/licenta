@@ -22,7 +22,7 @@ public class HotelController : ControllerBase
 
     [AuthorizeRoles(Role.Owner, Role.Manager)]
     [HttpGet("user-management-hotels")]
-    public async Task<IActionResult> GetHotels(string name)
+    public async Task<IActionResult> GetHotels(string? name)
     {
         var authenticatedUsername = User.FindFirst(ClaimTypes.Name).Value;
         var authenticatedUser = await _userLogic.GetUserByUsernameWithHotels(authenticatedUsername);

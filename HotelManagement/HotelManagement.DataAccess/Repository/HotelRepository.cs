@@ -146,9 +146,9 @@ public class HotelRepository : AbstractRepository<Hotel>, IHotelRepository
         return nextRoomNumber + 1;
     }
 
-    public async Task<IEnumerable<Hotel>> GetHotelsBySubstringAndCount(int takeCount, User authenticatedUser, string name)
+    public async Task<IEnumerable<Hotel>> GetHotelsBySubstringAndCount(int takeCount, User authenticatedUser, string? name)
     {
-        if (authenticatedUser.Role.Name.Equals(Models.Constants.Role.Owner))
+        if (authenticatedUser.Role.Name.Equals(Role.Owner))
         {
             if (string.IsNullOrEmpty(name))
             {
