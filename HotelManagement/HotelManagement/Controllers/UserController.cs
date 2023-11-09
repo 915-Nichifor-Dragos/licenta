@@ -135,4 +135,15 @@ public class UserController : ControllerBase{
             return BadRequest("Could not delete picture");
         }
     }
+
+    [HttpDelete]
+    [AuthorizeRoles(Role.Manager, Role.Owner)]
+    public async Task<IActionResult> DeleteUser(string id)
+    {
+        var authenticatedUsername = User.FindFirst(ClaimTypes.Name).Value;
+
+        var success = await _userLogic.DeleteUser(Guid.Parse(id), authenticatedUsername);
+
+        return Ok(new { success });
+    }
 }

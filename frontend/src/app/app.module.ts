@@ -28,7 +28,9 @@ import { RoleGuard } from './services/role-guard.service';
 import { UserManagementComponent } from './components/user-management/user-management.component';
 import { UserService } from './services/user.service';
 import { HotelService } from './services/hotel.service';
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { DeleteDialogComponent } from './components/shared/delete-dialog/delete-dialog.component';
+import { EditUserRoleComponent } from './components/user/edit-user-role/edit-user-role.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { HotelService } from './services/hotel.service';
     FooterComponent,
     NavbarComponent,
     HomeComponent,
-    UserManagementComponent
+    UserManagementComponent,
+    DeleteDialogComponent,
+    EditUserRoleComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +60,7 @@ import { HotelService } from './services/hotel.service';
     MatPaginatorModule,
     MatTableModule,
     MatIconModule,
+    MatDialogModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-center',
       preventDuplicates: true,

@@ -97,7 +97,7 @@ public class UserLogic : IUserLogic
             .Select(uh => uh.UsersId)
             .ToList();
 
-        if (authenticatedUser.Role.Name.Equals(Models.Constants.Role.Manager) && !subordinates.Contains(id))
+        if (authenticatedUser.Role.Name.Equals(Role.Manager) && !subordinates.Contains(id))
         {
             return false;
         }

@@ -1,4 +1,5 @@
 export interface UserManagementUserListing {
+    id: string,
     firstName: string,
     lastName: string,
     role: string,

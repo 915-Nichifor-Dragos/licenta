@@ -1,14 +1,15 @@
-import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort, Sort } from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Observable, debounceTime, distinctUntilChanged, map, startWith, switchMap } from 'rxjs';
+import { Observable, debounceTime, distinctUntilChanged, startWith, switchMap } from 'rxjs';
 import { UserManagementHotelListing } from 'src/app/models/hotel.model';
 import { UserManagementUserListing } from 'src/app/models/user.model';
 import { HotelService } from 'src/app/services/hotel.service';
 import { UserService } from 'src/app/services/user.service';
+import { DeleteDialogComponent } from '../shared/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-user-management',
@@ -18,7 +19,9 @@ import { UserService } from 'src/app/services/user.service';
 export class UserManagementComponent implements OnInit {
   displayedColumns: string[] = ['firstName', 'lastName', 'role', 'email', 'birthDate', 'registrationDate', 'edit', 'remove'];
   dataSource = new MatTableDataSource<UserManagementUserListing>();
+
   myControl = new FormControl('');
+
   selectedHotelName = ""
   selectedHotelId = ""
 
@@ -31,7 +34,6 @@ export class UserManagementComponent implements OnInit {
   pageIndex = 1;
 
   options: UserManagementHotelListing[] = [];
-  ELEMENT_DATA: UserManagementUserListing[] = []
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -39,7 +41,7 @@ export class UserManagementComponent implements OnInit {
   constructor(
     private hotelService: HotelService,
     private userService: UserService,
-    private _liveAnnouncer: LiveAnnouncer
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -57,11 +59,25 @@ export class UserManagementComponent implements OnInit {
     });
   }
 
-  clearInput() {
+  openDialog(userId: string): void {
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      data: "user",
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == true) {
+        this.userService.deleteUser(userId).subscribe(response => {
+            this.fetchUserData();
+          })
+      }
+    });
+  }
+
+  onClearInput() {
     this.selectedHotelName = '';
   }
 
-  sortBy(sortField: string) {
+  onSort(sortField: string) {
     if (!this.selectedHotelId && !this.selectedHotelName) {
       return;
     }
@@ -75,6 +91,7 @@ export class UserManagementComponent implements OnInit {
 
     this.sortField = sortField;
     this.isAscending = true;
+    
     this.fetchUserData()
   }
   

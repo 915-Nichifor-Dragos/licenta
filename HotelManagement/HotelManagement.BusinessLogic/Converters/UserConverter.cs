@@ -9,6 +9,7 @@ public class UserConverter
     {
         return new UserManagementUserViewModel()
         {
+            Id = user.Id,
             FirstName = user.FirstName,
             LastName = user.LastName,
             Role = user.Role.Name.ToString(),

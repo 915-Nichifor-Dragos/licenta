@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -26,5 +26,14 @@ export class UserService {
     }
   
     return this.http.get<any>(url, { params });
+  }
+
+  deleteUser(userId: string): Observable<any> {
+    const url = `${this.baseUrl}/users`;
+    
+    let params = new HttpParams()
+      .set('id', userId!.toString())
+
+    return this.http.delete(url, { params });
   }
 }

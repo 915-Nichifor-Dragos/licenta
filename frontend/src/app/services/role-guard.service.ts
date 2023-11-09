@@ -10,7 +10,7 @@ export class RoleGuard implements CanActivate {
   constructor(
     private authService: AuthService, 
     private router: Router
-    ) {}
+    ) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -28,14 +28,17 @@ export class RoleGuard implements CanActivate {
 
     return Promise.all(roleChecks).then(results => {
       const hasAtLeastOneRole = results.some(result => result === true);
+
       if (hasAtLeastOneRole) {
         return true;
       } else {
         this.router.navigate(['/login']); // Navigate to unauthorized or any other appropriate route
+
         return false;
       }
     }).catch(error => {
       console.error('Error occurred while checking role:', error);
+      
       return false;
     });
   }
