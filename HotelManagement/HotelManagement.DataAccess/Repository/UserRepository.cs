@@ -20,7 +20,8 @@ public class UserRepository : AbstractRepository<User>, IUserRepository
     public async Task<User?> GetById(Guid id)
     {
         return await _context.Users
-            .FindAsync(id);
+            .Include(u => u.Role)
+            .FirstOrDefaultAsync(u => u.Id == id);
     }
 
     public async Task<User?> GetByEmail(string email)

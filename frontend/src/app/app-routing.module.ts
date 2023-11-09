@@ -5,6 +5,7 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { HomeComponent } from './components/home/home.component';
 import { RoleGuard } from './services/role-guard.service';
 import { UserManagementComponent } from './components/user-management/user-management.component';
+import { EditUserRoleComponent } from './components/user/edit-user-role/edit-user-role.component';
 
 const routes: Routes = [
   { 
@@ -35,7 +36,15 @@ const routes: Routes = [
     data: {
       expectedRoles: ['Owner', 'Manager']
     }
-  }
+  },
+  { 
+    path: 'user-management/edit-role/:id', 
+    component: EditUserRoleComponent,
+    canActivate: [RoleGuard],
+    data: {
+      expectedRoles: ['Owner', 'Manager']
+    }
+  },
 ];
 
 @NgModule({

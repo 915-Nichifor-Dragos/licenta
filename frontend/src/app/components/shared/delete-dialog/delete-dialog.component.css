@@ -1,0 +1,25 @@
+.custom-dialog {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .custom-dialog h1 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  .custom-dialog p {
+    margin-bottom: 20px;
+  }
+  
+  .cancel-button {
+    color: #333;
+    background-color: #eee;
+    margin-right: 10px;
+  }
+  
+  .confirm-button {
+    color: #fff;
+    background-color: #f44336; /* Red color for emphasis */
+  }
+  

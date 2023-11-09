@@ -10,6 +10,7 @@ import { UserManagementUserListing } from 'src/app/models/user.model';
 import { HotelService } from 'src/app/services/hotel.service';
 import { UserService } from 'src/app/services/user.service';
 import { DeleteDialogComponent } from '../shared/delete-dialog/delete-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-management',
@@ -41,7 +42,8 @@ export class UserManagementComponent implements OnInit {
   constructor(
     private hotelService: HotelService,
     private userService: UserService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public router: Router
   ) {}
 
   ngOnInit() {
@@ -73,6 +75,10 @@ export class UserManagementComponent implements OnInit {
     });
   }
 
+  onEditRole(userId: string) {
+    this.router.navigate(['user-management/edit-role', userId]);
+  }
+
   onClearInput() {
     this.selectedHotelName = '';
   }
@@ -91,7 +97,7 @@ export class UserManagementComponent implements OnInit {
 
     this.sortField = sortField;
     this.isAscending = true;
-    
+
     this.fetchUserData()
   }
   

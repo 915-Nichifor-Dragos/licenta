@@ -1,5 +1,6 @@
 using HotelManagement.BusinessLogic.ILogic;
 using HotelManagement.Models.Constants;
+using HotelManagement.Models.DataModels;
 using HotelManagement.Models.ViewModels;
 using HotelManagement.Web.Authorize;
 using Microsoft.AspNetCore.Authorization;
@@ -87,6 +88,43 @@ public class UserController : ControllerBase{
         return BadRequest();
     }
 
+    [HttpGet("role/{userId}")]
+    [AuthorizeRoles(Role.Manager, Role.Owner)]
+    public async Task<IActionResult> GetUsernameAndRoleById(string userId)
+    {
+        var user = await _userLogic.GetUserById(Guid.Parse(userId));
+
+        if (user == null)
+        {
+            return BadRequest();
+        }
+
+        var result = new UserRoleEditViewModel {
+            Username = user.Username,
+            Role = user.Role.Name
+        };
+
+        return Ok(result);
+    }
+
+    [AuthorizeRoles(Role.Manager, Role.Owner)]
+    [HttpPut("role")]
+    public async Task<IActionResult> UpdateRole(string username, Role changedRole)
+    {
+        var user = await _userLogic.GetUserByUsername(username);
+
+        if (user == null)
+        {
+            return BadRequest();
+        }
+
+        DBRole newRole = await _roleLogic.GetRoleByName(changedRole);
+
+        _userLogic.UpdateUserRole(user, newRole.Id);
+
+        return Ok();
+    }
+
     [HttpPut]
     public async Task<IActionResult> UpdateUserInformation(UserUpdateViewModel model)
     {
@@ -99,13 +137,13 @@ public class UserController : ControllerBase{
 
             if (await _userLogic.UpdateUserInfo(User.Identity.Name, model, host, port))
             {
-                return Ok("Succesfully updated user information");
+                return Ok();
             }
 
-            return BadRequest("Could not update user information");
+            return BadRequest();
         }
 
-        return BadRequest("Something went wrong");
+        return BadRequest();
     }
 
     [HttpPut("profile-picture")]
@@ -115,10 +153,10 @@ public class UserController : ControllerBase{
         {
             await _userLogic.UpdateProfilePicture(User.Identity.Name, ProfilePicture);
 
-            return Ok("Succesfully updated profile picture");
+            return Ok();
         }
 
-        return BadRequest("Something went wrong");
+        return BadRequest();
     }
 
     [HttpDelete("profile-picture")]
@@ -128,11 +166,11 @@ public class UserController : ControllerBase{
         {
             await _userLogic.DeleteProfilePicture(User.Identity.Name);
 
-            return Ok("Succesfully deleted profile picture");
+            return Ok();
         }
         catch (Exception)
         {
-            return BadRequest("Could not delete picture");
+            return BadRequest();
         }
     }
 

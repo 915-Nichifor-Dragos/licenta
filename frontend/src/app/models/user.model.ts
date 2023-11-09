@@ -7,3 +7,8 @@ export interface UserManagementUserListing {
     birthDate: Date,
     registrationDate: Date
 }
+
+export interface UserEditRole {
+    username: string,
+    role: string
+}

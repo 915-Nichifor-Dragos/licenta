@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { UserEditRole } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -35,5 +36,21 @@ export class UserService {
       .set('id', userId!.toString())
 
     return this.http.delete(url, { params });
+  }
+
+  getUserRoleEdit(userId: string): Observable<UserEditRole> {
+    const url = `${this.baseUrl}/users/role/${userId}`;
+
+    return this.http.get(url) as Observable<UserEditRole>;
+  }
+
+  updateUserRole(userData: any): Observable<any> {
+    const url = `${this.baseUrl}/users/role`;
+
+    let params = new HttpParams()
+      .set('username', userData.username)
+      .set('changedRole', userData.role);
+
+    return this.http.put(url, null, { params: params });
   }
 }
