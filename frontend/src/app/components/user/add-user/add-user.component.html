@@ -1,0 +1,119 @@
+<div class="container pb-3">
+    <div class="row">
+        <div class="col-1">
+            <a class="text-muted back-button" routerLink="/login">Back</a>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col center-content">
+            <h6 class="text-center fw-bold">Client Registration</h6>
+        </div>
+    </div>
+
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" id="user-form">
+        <div class="row mb-5">
+          <div class="col p-5">
+            <div class="mb-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Username</mat-label>
+                <input matInput formControlName="username" placeholder="Insert your username" maxlength="30" minlength="4" required />
+                <mat-hint>Username must be alphanumeric and must be between 4 and 30 characters</mat-hint>
+              </mat-form-field>
+            </div>
+
+            <div class="mb-5">
+                <mat-form-field appearance="outline">
+                  <mat-label>Password</mat-label>
+                  <input matInput formControlName="password" type="password" placeholder="Insert your password" maxlength="30" minlength="8" required />
+                  <mat-hint>Password must be between 8 and 30 characters, no white spaces are allowed. Must have at least 1 lowercase letter,
+                    digit and special character</mat-hint>
+                </mat-form-field>
+            </div>
+
+              <div class="mb-4">
+                <mat-form-field appearance="outline">
+                  <mat-label>Confirm password</mat-label>
+                  <input matInput formControlName="confirmPassword" type="password" placeholder="Confirm your password" maxlength="30" minlength="8" required />
+                  <mat-hint>Confirm your password by reinserting it</mat-hint>
+                </mat-form-field>
+              </div>
+
+              <div class="mb-4">
+                <mat-form-field appearance="outline">
+                  <mat-label>First name</mat-label>
+                  <input matInput formControlName="firstName" placeholder="Insert your first name" maxlength="100" minlength="2" required />
+                  <mat-hint>First name is between 2 and 100 characters</mat-hint>
+                </mat-form-field>
+              </div>
+
+              <div class="mb-4">
+                <mat-form-field appearance="outline">
+                  <mat-label>Last name</mat-label>
+                  <input matInput formControlName="lastName" placeholder="Insert your last name" maxlength="100" minlength="2" required />
+                  <mat-hint>Last name is between 2 and 100 characters</mat-hint>
+                </mat-form-field>
+              </div>
+
+              <div class="mb-4">
+                <mat-form-field appearance="outline">
+                  <mat-label>E-mail</mat-label>
+                  <input matInput formControlName="email" placeholder="Insert your email" required />
+                  <mat-hint>Email must include @ and a domain. Characters <>/\(),. are not allowed</mat-hint>
+                </mat-form-field>
+              </div>  
+          </div>
+          
+          <div class="col p-5">
+            <div class="mb-3 input-group-lg">
+                <mat-form-field appearance="outline">
+                    <mat-label>Birth date</mat-label>
+                    <input matInput formControlName="birthDate" placeholder="Select your birth date" required [matDatepicker]="picker">
+                    <mat-hint>Date is in MM/DD/YYYY format</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+              </div>
+
+                <div class="mb-4">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Gender</mat-label>
+                        <mat-select matInput formControlName="gender" required>
+                            <mat-option value="0">Male</mat-option>
+                            <mat-option value="1">Female</mat-option>
+                            <mat-option value="2">Other</mat-option>
+                        </mat-select>
+                        <mat-hint>Select your gender</mat-hint>
+                    </mat-form-field>
+               </div>
+              
+              <div class="mb-4">
+                <mat-form-field appearance="outline">
+                  <mat-label>Address</mat-label>
+                  <input matInput formControlName="address" placeholder="Insert your address" />
+                  <mat-hint>Address can have at most 100 characters</mat-hint>
+                </mat-form-field>
+              </div>
+
+              <div class="mb-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Bio</mat-label>
+                    <textarea matInput formControlName="bio" placeholder="Insert your bio"></textarea>
+                    <mat-hint>Bio can have at most 1000 characters</mat-hint>
+                </mat-form-field>
+              </div>
+
+              <!-- To implement using bezkoder tutorial -->
+              <div class="mb-4 input-group-lg">
+                <mat-form-field appearance="outline">
+                  <mat-label>Profile picture</mat-label>
+                  <input matInput formControlName="profilePicture" placeholder="Insert your profile picture" />
+                  <mat-hint>Must be .jpg, .png, .jpeg and under 10MB</mat-hint>
+                </mat-form-field>
+              </div>
+            
+            <button type="submit" id="submit" class="submit btn login-button fw-bold py-2 w-100">Register</button>
+          </div>
+        </div>
+      </form>      
+</div>

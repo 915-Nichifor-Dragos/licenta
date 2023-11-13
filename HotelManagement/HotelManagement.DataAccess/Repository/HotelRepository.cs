@@ -4,6 +4,7 @@ using HotelManagement.DataAccess.IRepository;
 using HotelManagement.Models.Constants;
 using HotelManagement.Models.DataModels;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.InteropServices;
 
 namespace HotelManagement.DataAccess.Repository;
 
@@ -103,11 +104,17 @@ public class HotelRepository : AbstractRepository<Hotel>, IHotelRepository
         }
     }
 
-    public async Task<(List<Hotel>, int)>? GetHotelsByOwner(User user, int pageIndex, int pageSize, ValidOrderByParametersHotel sortParam, SortOrder sortOrder)
+    public async Task<(List<Hotel>, int)>? GetHotelsByOwner(
+        User user, 
+        int pageIndex, 
+        int pageSize, 
+        HotelSortType sortAttribute, 
+        bool isAscending)
     {
-        IOrderedQueryable<Hotel> hotelsQueryable;
 
-        var hotels = _hotels.Where(u => u.OwnerId == user.Id).Include(u => u.UserHotels)
+        var query = _context.Hotels
+            .Where(u => u.OwnerId == user.Id)
+            .Include(u => u.UserHotels)
             .Select(h => new Hotel
             {
                 Id = h.Id,
@@ -115,16 +122,25 @@ public class HotelRepository : AbstractRepository<Hotel>, IHotelRepository
                 IsAvailable = h.IsAvailable,
                 NumberOfEmployees = h.UserHotels.Count,
                 Location = h.Location,
-            });
+            })
+            .AsQueryable();
 
-        hotels = sortOrder.Equals(SortOrder.Ascending)
-            ? hotels.OrderBy(DynamicPropertySortingDictionary.SortingDictionary[sortParam])
-            : hotels.OrderByDescending(DynamicPropertySortingDictionary.SortingDictionary[sortParam]);
+        query = sortAttribute switch
+        {
+            HotelSortType.Name => isAscending ? query.OrderBy(u => u.Name)
+                                : query.OrderByDescending(u => u.Name),
+            HotelSortType.Location => isAscending ? query.OrderBy(u => u.Location)
+                                : query.OrderByDescending(u => u.Location),
+            HotelSortType.NumberOfEmployees => isAscending ? query.OrderBy(u => u.NumberOfEmployees)
+                                : query.OrderByDescending(u => u.NumberOfEmployees),
+            _ => isAscending ? query.OrderBy(u => u.Name)
+                                 : query.OrderByDescending(u => u.Name),
+        };
 
-        var count = await hotels.CountAsync();
-        var items = await hotels.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
+        var totalHotelCount = await query.CountAsync();
+        var items = await query.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
 
-        return (items, count);
+        return (items, totalHotelCount);
     }
 
     public async Task<int> GetNextHotelRoomNumber(Guid hotelId)

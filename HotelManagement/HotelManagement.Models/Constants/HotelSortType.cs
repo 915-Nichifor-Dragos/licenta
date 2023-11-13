@@ -1,8 +1,9 @@
 ﻿namespace HotelManagement.Models.Constants;
 
-public enum ValidOrderByParametersHotel
+public enum HotelSortType
 {
+    None,
     Name,
     Location,
-    NumberOfEmployees
+    NumberOfEmployees,
 }

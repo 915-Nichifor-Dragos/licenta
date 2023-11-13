@@ -22,7 +22,7 @@ export class UserService {
       .set('isAscending', isAscending!.toString())
       .set('sortAttribute', sortAttribute!.toString());
 
-    if (hotelId != "all") {
+    if (hotelId != "All hotels") {
       url = `${this.baseUrl}/users/subordinates/${hotelId}`;
     }
   

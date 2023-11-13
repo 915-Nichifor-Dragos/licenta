@@ -29,7 +29,7 @@
                   />
                   <mat-icon matSuffix (click)="onClearInput()">cancel</mat-icon>
                   <mat-autocomplete #auto="matAutocomplete" (optionSelected)="optionSelected($event)">
-                    <mat-option value="all">All hotels</mat-option>
+                    <mat-option value="All hotels">All hotels</mat-option>
                     <mat-option *ngFor="let option of options" [value]="option.id">
                       {{ option.name }}
                     </mat-option>
@@ -121,6 +121,13 @@
             </ng-container>
         
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+            <tr *ngIf="!dataSource.data || dataSource.data.length === 0">
+                <td class="text-center" [attr.colspan]="displayedColumns.length">
+                    The hotel doesn't have any users.
+                </td>
+            </tr>
+            
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
     

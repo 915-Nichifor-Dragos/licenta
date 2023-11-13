@@ -42,4 +42,35 @@ public class HotelController : ControllerBase
 
         return Ok(hotelData);
     }
+
+    [AuthorizeRoles(Role.Owner)]
+    [HttpGet()]
+    public async Task<IActionResult> HotelInformation(
+        int? pageIndex,
+        int? pageSize, 
+        HotelSortType sortAttribute, 
+        bool isAscending)
+    {
+        var user = await _userLogic.GetUserByUsername(User.Identity.Name);
+
+        if (user != null)
+        {
+            var paginatedList = await _hotelLogic.GetHotelsByOwner(
+                user,
+                pageIndex ?? 1, 
+                pageSize ?? 5,
+                sortAttribute,
+                isAscending);
+
+            var result = new HotelManagementPaginator
+            {
+                Hotels = paginatedList.Item1,
+                Count = paginatedList.Item2
+            };
+
+            return Ok(result);
+        }
+
+        return BadRequest();
+    }
 }

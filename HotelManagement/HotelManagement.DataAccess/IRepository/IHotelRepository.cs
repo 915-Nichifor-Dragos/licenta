@@ -11,7 +11,7 @@ public interface IHotelRepository
     void Delete(Guid id);
     Task<int> SaveChanges();
     Task<List<Hotel>> GetHotels(int count, User user);
-    Task<(List<Hotel>, int)>? GetHotelsByOwner(User user, int pageIndex, int pageSize, ValidOrderByParametersHotel sortParam, SortOrder sortOrder);
+    Task<(List<Hotel>, int)>? GetHotelsByOwner(User user, int pageIndex, int pageSize, HotelSortType sortAttribute, bool isAscending);
     Task AddUserToHotel(Hotel hotel, User user);
     Task<int> GetNextHotelRoomNumber(Guid hotelId);
     Task<List<Hotel>> GetAvailableHotels(DateTime startDate, DateTime endDate);

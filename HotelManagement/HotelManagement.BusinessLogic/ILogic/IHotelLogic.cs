@@ -1,3 +1,4 @@
+using HotelManagement.Models.Constants;
 using HotelManagement.Models.DataModels;
 using HotelManagement.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -10,7 +11,7 @@ public interface IHotelLogic
     Task<IEnumerable<Hotel>> GetHotelsBySubstringAndCount(int takeCount, User authenticatedUser, string? name);
     Task<Hotel> GetById(Guid hotelId);
     Task AddUserToHotel(Hotel hotel, User user);
-    //Task<PaginatedList<HotelInfo>> GetHotelsByOwner(User user, int pageIndex, int pageSize, string sortParam, bool sortingOrder);
+    Task<(List<HotelManagementHotelView>, int count)> GetHotelsByOwner(User user, int pageIndex, int pageSize, HotelSortType sortAttribute, bool isAscending);
     Task AddHotel(Hotel hotel, IFormFile profilePicture);
     Task UpdateHotel(Hotel hotel);
     Task<int> GetNextHotelRoomNumber(Guid hotelId);

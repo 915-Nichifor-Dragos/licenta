@@ -25,12 +25,16 @@ import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { RoleGuard } from './services/role-guard.service';
-import { UserManagementComponent } from './components/user-management/user-management.component';
+import { UserManagementComponent } from './components/management/user-management/user-management.component';
 import { UserService } from './services/user.service';
 import { HotelService } from './services/hotel.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteDialogComponent } from './components/shared/delete-dialog/delete-dialog.component';
 import { EditUserRoleComponent } from './components/user/edit-user-role/edit-user-role.component';
+import { AddUserComponent } from './components/user/add-user/add-user.component';
+import { HotelManagementComponent } from './components/management/hotel-management/hotel-management.component';
+import { BookingManagementComponent } from './components/management/booking-management/booking-management.component';
+import { RoomManagementComponent } from './components/management/room-management/room-management.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +46,11 @@ import { EditUserRoleComponent } from './components/user/edit-user-role/edit-use
     HomeComponent,
     UserManagementComponent,
     DeleteDialogComponent,
-    EditUserRoleComponent
+    EditUserRoleComponent,
+    AddUserComponent,
+    HotelManagementComponent,
+    BookingManagementComponent,
+    RoomManagementComponent
   ],
   imports: [
     BrowserModule,

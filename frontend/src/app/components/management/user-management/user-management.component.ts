@@ -9,7 +9,7 @@ import { UserManagementHotelListing } from 'src/app/models/hotel.model';
 import { UserManagementUserListing } from 'src/app/models/user.model';
 import { HotelService } from 'src/app/services/hotel.service';
 import { UserService } from 'src/app/services/user.service';
-import { DeleteDialogComponent } from '../shared/delete-dialog/delete-dialog.component';
+import { DeleteDialogComponent } from '../../shared/delete-dialog/delete-dialog.component';
 import { Router } from '@angular/router';
 
 @Component({
@@ -23,7 +23,7 @@ export class UserManagementComponent implements OnInit {
 
   myControl = new FormControl('');
 
-  selectedHotelName = ""
+  selectedHotelName = "All hotels"
   selectedHotelId = ""
 
   sortField = "None"
@@ -58,6 +58,7 @@ export class UserManagementComponent implements OnInit {
     )
     .subscribe((options: UserManagementHotelListing[]) => {
       this.options = options;
+      this.fetchUserData();
     });
   }
 
@@ -126,7 +127,7 @@ export class UserManagementComponent implements OnInit {
     this.pageSize = event.pageSize;
     this.pageIndex = event.pageIndex + 1;
   
-    if (this.selectedHotelId && this.selectedHotelName) {
+    if (this.selectedHotelName) {
       this.fetchUserData();
     }
   }

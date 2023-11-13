@@ -35,37 +35,23 @@ public class HotelLogic : IHotelLogic
         return await _repository.GetHotelsBySubstringAndCount(takeCount, authenticatedUser, name);
     }
 
-    //public async Task<PaginatedList<HotelInfo>> GetHotelsByOwner(User user, int pageIndex, int pageSize, string sortParam, bool sortingOrder)
-    //{
-    //    var order = sortingOrder ? SortOrder.Descending : SortOrder.Ascending;
-    //    ValidOrderByParametersHotel validSortParam;
+    public async Task<(List<HotelManagementHotelView>, int count)> GetHotelsByOwner(
+        User user,
+        int pageIndex, 
+        int pageSize, 
+        HotelSortType sortAttribute, 
+        bool isAscending)
+    {
 
-    //    switch (sortParam)
-    //    {
-    //        case "Name":
-    //            validSortParam = ValidOrderByParametersHotel.Name;
-    //            break;
+        var tupleItemsHotelsAndCount = await _repository.GetHotelsByOwner(user, pageIndex, pageSize, sortAttribute, isAscending);
 
-    //        case "Location":
-    //            validSortParam = ValidOrderByParametersHotel.Location;
-    //            break;
+        var hotelsToSendInView = tupleItemsHotelsAndCount.Item1
+            .Select(HotelConverter.FromHotelToHotelManagementHotelView)
+            .ToList();
+        var count = tupleItemsHotelsAndCount.Item2;
 
-    //        case "NumberOfEmployees":
-    //            validSortParam = ValidOrderByParametersHotel.NumberOfEmployees;
-    //            break;
-
-    //        default:
-    //            validSortParam = ValidOrderByParametersHotel.Name;
-    //            break;
-
-    //    }
-
-    //    var (hotels, count) = await _repository.GetHotelsByOwner(user, pageIndex, pageSize, validSortParam, order);
-
-    //    var hotelsToSendInView = HotelsConverter.FromHotelToHotelsInformationViewModel(hotels).Hotels;
-
-    //    return new PaginatedList<HotelInfo>(hotelsToSendInView, count, pageIndex, pageSize, sortParam, sortingOrder);
-    //}
+        return (hotelsToSendInView, count);
+    }
 
     public async Task<Hotel> GetById(Guid hotelId)
     {
