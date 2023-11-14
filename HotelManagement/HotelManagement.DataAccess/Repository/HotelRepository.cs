@@ -111,10 +111,12 @@ public class HotelRepository : AbstractRepository<Hotel>, IHotelRepository
         HotelSortType sortAttribute, 
         bool isAscending)
     {
+        var userHotelsIds = user.UserHotels.Select(uh => uh.HotelsId);
 
         var query = _context.Hotels
-            .Where(u => u.OwnerId == user.Id)
             .Include(u => u.UserHotels)
+            .Where(u => (user.Role.Name.Equals(Role.Owner)  ||
+                        (user.Role.Name.Equals(Role.Manager) && u.UserHotels.Any(uh => userHotelsIds.Contains(uh.HotelsId)))))
             .Select(h => new Hotel
             {
                 Id = h.Id,

@@ -74,7 +74,9 @@ public class UserController : ControllerBase{
                 hotelId,
                 sortAttribute,
                 isAscending, 
-                User.IsInRole(Role.Owner.ToString()), pageSize ?? 5, pageIndex ?? 1);
+                User.IsInRole(Role.Owner.ToString()), 
+                pageSize ?? 5,
+                pageIndex ?? 1);
 
             var result = new UserManagementPaginator
             {

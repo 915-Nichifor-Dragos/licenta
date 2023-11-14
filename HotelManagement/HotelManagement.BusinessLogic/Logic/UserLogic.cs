@@ -311,7 +311,8 @@ public class UserLogic : IUserLogic
         var tupleItemsUsersAndCount = await _userRepository.GetAll(
             sortAttribute,
             isAscending,
-            user, pageSize, 
+            user, 
+            pageSize, 
             pageIndex);
 
         var usersToSendInView = tupleItemsUsersAndCount.Item1

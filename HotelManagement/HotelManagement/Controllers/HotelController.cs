@@ -22,7 +22,7 @@ public class HotelController : ControllerBase
 
     [AuthorizeRoles(Role.Owner, Role.Manager)]
     [HttpGet("user-management-hotels")]
-    public async Task<IActionResult> GetHotels(string? name)
+    public async Task<IActionResult> GetHotelsAutocomplete(string? name)
     {
         var authenticatedUsername = User.FindFirst(ClaimTypes.Name).Value;
         var authenticatedUser = await _userLogic.GetUserByUsernameWithHotels(authenticatedUsername);
@@ -51,12 +51,12 @@ public class HotelController : ControllerBase
         HotelSortType sortAttribute, 
         bool isAscending)
     {
-        var user = await _userLogic.GetUserByUsername(User.Identity.Name);
+        var authenticatedUser = await _userLogic.GetUserByUsernameWithHotels(User.Identity.Name);
 
-        if (user != null)
+        if (authenticatedUser != null)
         {
             var paginatedList = await _hotelLogic.GetHotelsByOwner(
-                user,
+                authenticatedUser,
                 pageIndex ?? 1, 
                 pageSize ?? 5,
                 sortAttribute,
