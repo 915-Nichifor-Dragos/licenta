@@ -12,10 +12,7 @@ export class RoleGuard implements CanActivate {
     private router: Router
     ) { }
 
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+  canActivate(next: ActivatedRouteSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const expectedRoles = next.data['expectedRoles'];
 
     const roleChecks = expectedRoles.map((role: string | null) => {
@@ -32,7 +29,7 @@ export class RoleGuard implements CanActivate {
       if (hasAtLeastOneRole) {
         return true;
       } else {
-        this.router.navigate(['/login']); // Navigate to unauthorized or any other appropriate route
+        this.router.navigate(['/login']); // Navigate to unauthorized or any other appropriate route (update when adding 403)
 
         return false;
       }

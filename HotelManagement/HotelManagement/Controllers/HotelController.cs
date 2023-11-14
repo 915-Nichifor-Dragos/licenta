@@ -43,9 +43,9 @@ public class HotelController : ControllerBase
         return Ok(hotelData);
     }
 
-    [AuthorizeRoles(Role.Owner)]
+    [AuthorizeRoles(Role.Owner, Role.Manager)]
     [HttpGet()]
-    public async Task<IActionResult> HotelInformation(
+    public async Task<IActionResult> GetHotels(
         int? pageIndex,
         int? pageSize, 
         HotelSortType sortAttribute, 

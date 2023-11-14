@@ -1,4 +1,14 @@
-<div class="container pb-3">
+
+<ng-container *ngIf="!dataLoaded; else usermanagement">
+    <mat-progress-spinner
+        class="loading-spinner"
+        color='accent'
+        mode='indeterminate'
+        value='4'>
+    </mat-progress-spinner>
+</ng-container>
+
+<ng-template class="container pb-3" #usermanagement>
     <div class="row">
         <div class="col-1">
             <a class="text-muted back-button" routerLink="/home">Back</a>
@@ -143,4 +153,4 @@
         </mat-paginator>
 
     </div>
-</div>
+</ng-template >

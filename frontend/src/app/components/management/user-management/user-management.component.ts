@@ -1,16 +1,18 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Observable, debounceTime, distinctUntilChanged, startWith, switchMap } from 'rxjs';
+import { Router } from '@angular/router';
+
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Observable, debounceTime, distinctUntilChanged, startWith, switchMap } from 'rxjs';
+
 import { UserManagementHotelListing } from 'src/app/models/hotel.model';
 import { UserManagementUserListing } from 'src/app/models/user.model';
+import { DeleteDialogComponent } from '../../shared/delete-dialog/delete-dialog.component';
+
 import { HotelService } from 'src/app/services/hotel.service';
 import { UserService } from 'src/app/services/user.service';
-import { DeleteDialogComponent } from '../../shared/delete-dialog/delete-dialog.component';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-management',
@@ -29,6 +31,8 @@ export class UserManagementComponent implements OnInit {
   sortField = "None"
   isAscending = true;
 
+  dataLoaded = false;
+
   totalItemCount = 0;
 
   pageSize = 5;
@@ -37,7 +41,6 @@ export class UserManagementComponent implements OnInit {
   options: UserManagementHotelListing[] = [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     private hotelService: HotelService,
@@ -59,6 +62,7 @@ export class UserManagementComponent implements OnInit {
     .subscribe((options: UserManagementHotelListing[]) => {
       this.options = options;
       this.fetchUserData();
+      this.dataLoaded = true;
     });
   }
 

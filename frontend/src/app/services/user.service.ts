@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+
 import { UserEditRole } from '../models/user.model';
 
 @Injectable({
@@ -33,7 +34,7 @@ export class UserService {
     const url = `${this.baseUrl}/users`;
     
     let params = new HttpParams()
-      .set('id', userId!.toString())
+      .set('id', userId)
 
     return this.http.delete(url, { params });
   }

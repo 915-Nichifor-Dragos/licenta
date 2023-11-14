@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { UserEditRole } from 'src/app/models/user.model';
+
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -17,7 +20,7 @@ export class EditUserRoleComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private toastrService: ToastrService,
+    private snackBar: MatSnackBar,
     private router: Router,
     private route: ActivatedRoute,
     private userService: UserService
@@ -54,14 +57,17 @@ export class EditUserRoleComponent {
 
       this.userService.updateUserRole(userData).subscribe(
         (response: any) => {
-          this.toastrService.success('Update was successful');
+          this.snackBar.open('Update was successful', 'Close', {
+            duration: 2000,
+          });
           this.router.navigate(['/user-management']);
         },
         (error: any) => {
-          this.toastrService.error('Update failed');
+          this.snackBar.open('Update failed', 'Close', {
+            duration: 2000,
+          });
         }
-      );
-      
+      );  
     } 
   }
 }

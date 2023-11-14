@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
+
 import { UserClaim } from '../models/authentication.model';
 
 @Injectable({
@@ -37,7 +38,7 @@ export class AuthService{
         this.userClaims.next(userClaims);
       },
       (error: any) => {
-        
+        console.log(error);
       }
     );
   }

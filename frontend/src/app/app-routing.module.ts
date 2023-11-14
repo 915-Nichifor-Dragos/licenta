@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
+import { RoleGuard } from './services/role-guard.service';
+
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { HomeComponent } from './components/home/home.component';
-import { RoleGuard } from './services/role-guard.service';
 import { UserManagementComponent } from './components/management/user-management/user-management.component';
 import { EditUserRoleComponent } from './components/user/edit-user-role/edit-user-role.component';
 import { AddUserComponent } from './components/user/add-user/add-user.component';

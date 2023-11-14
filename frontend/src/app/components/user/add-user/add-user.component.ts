@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -15,7 +17,7 @@ export class AddUserComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private toastrService: ToastrService,
+    private snackBar: MatSnackBar,
     private router: Router
     ) { }
 
@@ -64,11 +66,15 @@ export class AddUserComponent implements OnInit {
 
         this.authService.register(userData).subscribe(
           (response) => {
-            this.toastrService.success('Register was successful');
+            this.snackBar.open('Register was successful', 'Close', {
+              duration: 2000,
+            });
             this.router.navigate(['/login']);
           },
           (error) => {
-            this.toastrService.error('Register failed');
+            this.snackBar.open('Register failed', 'Close', {
+              duration: 2000,
+            });
           }
         );
       } 
