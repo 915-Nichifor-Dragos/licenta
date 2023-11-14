@@ -41,14 +41,14 @@ public class HotelRepository : AbstractRepository<Hotel>, IHotelRepository
         await _context.SaveChangesAsync();
     }
 
-    public void Delete(Guid id)
+    public async Task Delete(Guid id)
     {
         var hotel = _context.Hotels.Find(id);
 
         if (hotel != null)
         {
             hotel.IsDeleted = true;
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
     }
 

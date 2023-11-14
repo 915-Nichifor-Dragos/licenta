@@ -1,6 +1,7 @@
 using HotelManagement.BusinessLogic.Converters;
 using HotelManagement.BusinessLogic.ILogic;
 using HotelManagement.DataAccess.IRepository;
+using HotelManagement.DataAccess.Repository;
 using HotelManagement.Models.Constants;
 using HotelManagement.Models.DataModels;
 using HotelManagement.Models.Options;
@@ -128,5 +129,12 @@ public class HotelLogic : IHotelLogic
         hotel.ImageUrl = _driveOptions.DefaultHotelPicture;
 
         await _repository.Update(hotel);
+    }
+
+    public async Task<bool> DeleteHotel(Guid id)
+    {
+        await _repository.Delete(id);
+
+        return true;
     }
 }

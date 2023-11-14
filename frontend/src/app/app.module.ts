@@ -12,8 +12,8 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { LoginComponent } from './components/auth/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { UserManagementComponent } from './components/management/user-management/user-management.component';
-import { EditUserRoleComponent } from './components/user/edit-user-role/edit-user-role.component';
-import { AddUserComponent } from './components/user/add-user/add-user.component';
+import { EditUserRoleComponent } from './components/management/user/edit-user-role/edit-user-role.component';
+import { AddUserComponent } from './components/management/user/add-user/add-user.component';
 import { HotelManagementComponent } from './components/management/hotel-management/hotel-management.component';
 import { BookingManagementComponent } from './components/management/booking-management/booking-management.component';
 import { RoomManagementComponent } from './components/management/room-management/room-management.component';
@@ -37,6 +37,7 @@ import { AuthService } from './services/auth.service';
 import { RoleGuard } from './services/role-guard.service';
 import { UserService } from './services/user.service';
 import { HotelService } from './services/hotel.service';
+import { EditHotelComponent } from './components/management/hotel/edit-hotel/edit-hotel.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { HotelService } from './services/hotel.service';
     AddUserComponent,
     HotelManagementComponent,
     BookingManagementComponent,
-    RoomManagementComponent
+    RoomManagementComponent,
+    EditHotelComponent
   ],
   imports: [
     BrowserModule,

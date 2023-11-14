@@ -8,7 +8,7 @@ public interface IHotelRepository
     Task<Hotel> GetById(Guid id);
     void Add(Hotel entity);
     Task Update(Hotel entity);
-    void Delete(Guid id);
+    Task Delete(Guid id);
     Task<int> SaveChanges();
     Task<List<Hotel>> GetHotels(int count, User user);
     Task<(List<Hotel>, int)>? GetHotelsByOwner(User user, int pageIndex, int pageSize, HotelSortType sortAttribute, bool isAscending);

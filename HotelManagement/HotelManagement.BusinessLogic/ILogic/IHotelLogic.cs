@@ -19,4 +19,5 @@ public interface IHotelLogic
     Task<List<Hotel>> GetByListId(List<Guid> hotelIds);
     Task<string> UploadProfilePicture(IFormFile profilePicture);
     Task DeletePicture(Guid id);
+    Task<bool> DeleteHotel(Guid id);
 }

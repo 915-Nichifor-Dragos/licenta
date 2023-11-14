@@ -32,4 +32,13 @@ export class HotelService {
   
     return this.http.get<any>(url, { params });
   }
+
+  deleteHotel(hotelId: string): Observable<any> {
+    const url = `${this.baseUrl}/hotels`;
+    
+    let params = new HttpParams()
+      .set('id', hotelId)
+
+    return this.http.delete(url, { params });
+  }
 }

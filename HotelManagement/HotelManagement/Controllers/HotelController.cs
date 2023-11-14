@@ -73,4 +73,13 @@ public class HotelController : ControllerBase
 
         return BadRequest();
     }
+
+    [HttpDelete]
+    [AuthorizeRoles(Role.Owner)]
+    public async Task<IActionResult> DeleteHotel(string id)
+    {
+        var success = await _hotelLogic.DeleteHotel(Guid.Parse(id));
+
+        return Ok(new { success });
+    }
 }
