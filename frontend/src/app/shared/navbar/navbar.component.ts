@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AuthService } from 'src/app/components/auth/auth.service';
+import { AuthService } from 'src/app/features/auth/auth.service';
 
 @Component({
   selector: 'app-navbar',

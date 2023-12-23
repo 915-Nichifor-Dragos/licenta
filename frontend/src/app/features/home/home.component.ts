@@ -1,6 +1,6 @@
 import { Component, Input, inject } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
-import { UserClaim } from 'src/app/components/auth/auth.model';
+import { UserClaim } from 'src/app/features/auth/auth.model';
 
 @Component({
   selector: 'app-home',

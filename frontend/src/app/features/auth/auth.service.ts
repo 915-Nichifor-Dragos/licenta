@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-
-import { UserClaim } from 'src/app/components/auth/auth.model';
+import { UserClaim } from './auth.model';
 
 @Injectable({
   providedIn: 'root',

@@ -13,12 +13,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 
-import { UserManagementHotelListing } from 'src/app/components/management/hotels/hotel.model';
-import { UserManagementUserListing } from 'src/app/components/management/users/user.model';
-
-import { HotelService } from 'src/app/components/management/hotels/hotel.service';
-import { UserService } from 'src/app/components/management/users/user.service';
-import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialog.component';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -26,6 +20,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+
+import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialog.component';
+import { UserManagementUserListing } from '../user.model';
+import { UserManagementHotelListing } from '../../hotels/hotel.model';
+import { HotelService } from '../../hotels/hotel.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-user-management',

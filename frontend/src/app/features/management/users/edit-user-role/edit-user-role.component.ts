@@ -3,16 +3,15 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
-
-import { UserEditRole } from 'src/app/components/management/users/user.model';
-
-import { UserService } from 'src/app/components/management/users/user.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatOptionModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+
+import { UserEditRole } from '../user.model';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-edit-user-role',

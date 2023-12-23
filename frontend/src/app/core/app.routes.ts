@@ -2,10 +2,8 @@ import { inject } from '@angular/core';
 import { Routes } from '@angular/router';
 
 import { RoleGuard } from '../services/role-guard.service';
-
-import { AuthService } from '../components/auth/auth.service';
-
-import { HomeComponent } from '../components/home/home.component';
+import { HomeComponent } from '../features/home/home.component';
+import { AuthService } from '../features/auth/auth.service';
 
 export const routes: Routes = [
   {
@@ -27,33 +25,33 @@ export const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () =>
-      import('../components/auth/auth.module').then((m) => m.AuthModule),
+      import('../features/auth/auth.module').then((m) => m.AuthModule),
   },
   {
     path: 'user-management',
     loadChildren: () =>
-      import('../components/management/users/user.module').then(
+      import('../features/management/users/user.module').then(
         (m) => m.UserModule
       ),
   },
   {
     path: 'hotel-management',
     loadChildren: () =>
-      import('../components/management/hotels/hotel.module').then(
+      import('../features/management/hotels/hotel.module').then(
         (m) => m.HotelModule
       ),
   },
   {
     path: 'room-management',
     loadChildren: () =>
-      import('../components/management/rooms/room.module').then(
+      import('../features/management/rooms/room.module').then(
         (m) => m.RoomModule
       ),
   },
   {
     path: 'booking-management',
     loadChildren: () =>
-      import('../components/management/bookings/booking.module').then(
+      import('../features/management/bookings/booking.module').then(
         (m) => m.BookingModule
       ),
   },

@@ -3,14 +3,13 @@ import { Router, RouterModule } from '@angular/router';
 
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-
-import { HotelService } from 'src/app/components/management/hotels/hotel.service';
-
-import { HotelManagementHotelListing } from 'src/app/components/management/hotels/hotel.model';
-import { DeleteDialogComponent } from '../../../../shared/delete-dialog/delete-dialog.component';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
+import { HotelService } from '../hotel.service';
+import { HotelManagementHotelListing } from '../hotel.model';
+import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-hotel-management',
