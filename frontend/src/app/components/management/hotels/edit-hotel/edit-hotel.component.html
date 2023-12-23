@@ -1,0 +1,49 @@
+<ng-container *ngIf="!dataLoaded; else usermanagement">
+  <mat-progress-spinner
+    class="loading-spinner"
+    color="accent"
+    mode="indeterminate"
+    value="4"
+  >
+  </mat-progress-spinner>
+</ng-container>
+
+<ng-template #usermanagement>
+  <div class="container pb-3">
+    <div class="row mb-2">
+      <div class="col-1">
+        <a class="text-muted back-button" routerLink="/hotel-management"
+          >Back</a
+        >
+      </div>
+    </div>
+
+    <mat-tab-group>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="tab-icon">edit</mat-icon>
+          Edit hotel
+        </ng-template>
+
+        <div class="p-4 mb-4">
+          <div class="col center-content">
+            <h6 class="text-center fw-bold">Edit hotel</h6>
+          </div>
+        </div>
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="tab-icon">assessment</mat-icon>
+          Statistics
+        </ng-template>
+
+        <div class="p-4 mb-4">
+          <div class="col center-content">
+            <h6 class="text-center fw-bold">Statistics</h6>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</ng-template>

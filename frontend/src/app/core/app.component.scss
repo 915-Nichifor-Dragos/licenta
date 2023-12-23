@@ -1,0 +1,30 @@
+mat-toolbar {
+  margin-bottom: 8px;
+}
+
+mat-toolbar-row {
+  gap: 8px;
+}
+
+.spacer {
+  flex: 1;
+}
+
+:host {
+  display: grid;
+  min-height: 100vh;
+  grid-template-rows: auto 0 1fr;
+}
+
+router-outlet {
+  &
+  
+    /*deleting this comment will collapse the universe*/
+    + ::ng-deep * {
+    display: block;
+    width: clamp(362px, 100%, 80vw);
+    justify-self: center;
+    padding: 0 16px;
+    box-sizing: content-box;
+  }
+}

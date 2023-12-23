@@ -1,0 +1,30 @@
+@use "@angular/material" as mat;
+
+@include mat.core();
+
+$my-primary: mat.define-palette(mat.$teal-palette, 600);
+$my-accent: mat.define-palette(mat.$grey-palette, 600);
+$my-warning: mat.define-palette(mat.$red-palette, 600);
+
+$my-typography: mat.define-typography-config();
+
+$my-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $my-primary,
+      accent: $my-accent,
+      warning: $my-warning,
+    ),
+    typography: $my-typography,
+    density: 0,
+  )
+);
+
+@include mat.all-component-themes($my-theme);
+@include mat.typography-hierarchy($my-typography);
+// Material customizations
+
+.mat-mdc-button-base {
+  --mdc-typography-button-text-transform: uppercase;
+  --mdc-text-button-container-shape: 16px !important;
+}
