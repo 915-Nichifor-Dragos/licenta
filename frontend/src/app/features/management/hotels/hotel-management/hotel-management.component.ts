@@ -14,7 +14,7 @@ import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialo
 @Component({
   selector: 'app-hotel-management',
   templateUrl: './hotel-management.component.html',
-  styleUrls: ['./hotel-management.component.css'],
+  styleUrls: ['./hotel-management.component.scss'],
   standalone: true,
   imports: [
     CommonModule,

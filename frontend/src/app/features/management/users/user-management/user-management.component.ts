@@ -30,7 +30,7 @@ import { UserService } from '../user.service';
 @Component({
   selector: 'app-user-management',
   templateUrl: './user-management.component.html',
-  styleUrls: ['./user-management.component.css'],
+  styleUrls: ['./user-management.component.scss'],
   standalone: true,
   imports: [
     CommonModule,

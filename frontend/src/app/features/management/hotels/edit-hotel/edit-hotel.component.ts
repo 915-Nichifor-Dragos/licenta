@@ -9,7 +9,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 @Component({
   selector: 'app-edit-hotel',
   templateUrl: './edit-hotel.component.html',
-  styleUrls: ['./edit-hotel.component.css'],
+  styleUrls: ['./edit-hotel.component.scss'],
   standalone: true,
   imports: [
     MatProgressSpinnerModule,

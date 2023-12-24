@@ -8,347 +8,337 @@
   </mat-progress-spinner>
 </ng-container>
 
-<ng-template #hotelmanagement>
-  <div class="container pb-3">
-    <div class="row">
-      <div class="col-1">
-        <a class="text-muted back-button" routerLink="/home">Back</a>
-      </div>
-    </div>
+<ng-template #hotelmanagement class="pb-3">
+  <a class="text-muted back-button" routerLink="/home">Back</a>
 
-    <div class="row mb-5">
-      <div class="col center-content">
-        <h6 class="text-center fw-bold">Hotel Management</h6>
-      </div>
-    </div>
+  <h1 class="text-center fw-bold mb-5">Hotel Management</h1>
 
-    <div class="mat-elevation-z8 mb-5">
-      <table mat-table [dataSource]="dataSource">
-        <ng-container matColumnDef="hotelName">
-          <th
-            mat-header-cell
-            *matHeaderCellDef
-            (click)="onSort('Name')"
-            class="text-center"
+  <div class="mat-elevation-z8 mb-5">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="hotelName">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          (click)="onSort('Name')"
+          class="text-center"
+        >
+          NAME
+          <svg
+            *ngIf="this.sortField == 'Name' && this.isAscending"
+            width="32px"
+            height="32px"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            stroke="#000000"
           >
-            NAME
-            <svg
-              *ngIf="this.sortField == 'Name' && this.isAscending"
-              width="32px"
-              height="32px"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              stroke="#000000"
-            >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g
-                id="SVGRepo_tracerCarrier"
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                d="M12 6V18M12 6L7 11M12 6L17 11"
+                stroke="#008080"
+                stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-              ></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M12 6V18M12 6L7 11M12 6L17 11"
-                  stroke="#008080"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ></path>
-              </g>
-            </svg>
-            <svg
-              *ngIf="this.sortField == 'Name' && !this.isAscending"
-              width="32px"
-              height="32px"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g
-                id="SVGRepo_tracerCarrier"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M12 6V18M12 18L7 13M12 18L17 13"
-                  stroke="#008080"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ></path>
-              </g>
-            </svg>
-          </th>
-          <td mat-cell *matCellDef="let element" class="text-center">
-            {{ element.name }}
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="location">
-          <th
-            mat-header-cell
-            *matHeaderCellDef
-            (click)="onSort('Location')"
-            class="text-center"
+              ></path>
+            </g>
+          </svg>
+          <svg
+            *ngIf="this.sortField == 'Name' && !this.isAscending"
+            width="32px"
+            height="32px"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            LOCATION
-            <svg
-              *ngIf="this.sortField == 'Location' && this.isAscending"
-              width="32px"
-              height="32px"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              stroke="#000000"
-            >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g
-                id="SVGRepo_tracerCarrier"
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                d="M12 6V18M12 18L7 13M12 18L17 13"
+                stroke="#008080"
+                stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-              ></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M12 6V18M12 6L7 11M12 6L17 11"
-                  stroke="#008080"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ></path>
-              </g>
-            </svg>
-            <svg
-              *ngIf="this.sortField == 'Location' && !this.isAscending"
-              width="32px"
-              height="32px"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g
-                id="SVGRepo_tracerCarrier"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M12 6V18M12 18L7 13M12 18L17 13"
-                  stroke="#008080"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ></path>
-              </g>
-            </svg>
-          </th>
-          <td mat-cell *matCellDef="let element" class="text-center">
-            {{ element.location }}
-          </td>
-        </ng-container>
+              ></path>
+            </g>
+          </svg>
+        </th>
+        <td mat-cell *matCellDef="let element" class="text-center">
+          {{ element.name }}
+        </td>
+      </ng-container>
 
-        <ng-container matColumnDef="numberOfEmployees">
-          <th
-            mat-header-cell
-            *matHeaderCellDef
-            (click)="onSort('NumberOfEmployees')"
-            class="text-center"
+      <ng-container matColumnDef="location">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          (click)="onSort('Location')"
+          class="text-center"
+        >
+          LOCATION
+          <svg
+            *ngIf="this.sortField == 'Location' && this.isAscending"
+            width="32px"
+            height="32px"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            stroke="#000000"
           >
-            NUMBER OF EMPLOYEES
-            <svg
-              *ngIf="this.sortField == 'NumberOfEmployees' && this.isAscending"
-              width="32px"
-              height="32px"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              stroke="#000000"
-            >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g
-                id="SVGRepo_tracerCarrier"
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                d="M12 6V18M12 6L7 11M12 6L17 11"
+                stroke="#008080"
+                stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-              ></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M12 6V18M12 6L7 11M12 6L17 11"
-                  stroke="#008080"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ></path>
-              </g>
-            </svg>
-            <svg
-              *ngIf="this.sortField == 'NumberOfEmployees' && !this.isAscending"
-              width="32px"
-              height="32px"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g
-                id="SVGRepo_tracerCarrier"
+              ></path>
+            </g>
+          </svg>
+          <svg
+            *ngIf="this.sortField == 'Location' && !this.isAscending"
+            width="32px"
+            height="32px"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                d="M12 6V18M12 18L7 13M12 18L17 13"
+                stroke="#008080"
+                stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-              ></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M12 6V18M12 18L7 13M12 18L17 13"
-                  stroke="#008080"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ></path>
-              </g>
-            </svg>
-          </th>
-          <td mat-cell *matCellDef="let element" class="text-center">
-            {{ element.numberOfEmployees }}
-          </td>
-        </ng-container>
+              ></path>
+            </g>
+          </svg>
+        </th>
+        <td mat-cell *matCellDef="let element" class="text-center">
+          {{ element.location }}
+        </td>
+      </ng-container>
 
-        <ng-container matColumnDef="availability">
-          <th mat-header-cell *matHeaderCellDef class="text-center">
-            AVAILABILITY
-          </th>
-          <td mat-cell *matCellDef="let element" class="text-center">
-            <svg
-              *ngIf="element.isAvailable"
-              height="16"
-              width="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g
-                id="SVGRepo_tracerCarrier"
+      <ng-container matColumnDef="numberOfEmployees">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          (click)="onSort('NumberOfEmployees')"
+          class="text-center"
+        >
+          NUMBER OF EMPLOYEES
+          <svg
+            *ngIf="this.sortField == 'NumberOfEmployees' && this.isAscending"
+            width="32px"
+            height="32px"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            stroke="#000000"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                d="M12 6V18M12 6L7 11M12 6L17 11"
+                stroke="#008080"
+                stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-              ></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M4 12.6111L8.92308 17.5L20 6.5"
-                  stroke="#008080"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ></path>
-              </g>
-            </svg>
-            <svg
-              *ngIf="!element.isAvailable"
-              height="16"
-              width="16"
-              viewBox="0 -0.5 25 25"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g
-                id="SVGRepo_tracerCarrier"
+              ></path>
+            </g>
+          </svg>
+          <svg
+            *ngIf="this.sortField == 'NumberOfEmployees' && !this.isAscending"
+            width="32px"
+            height="32px"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                d="M12 6V18M12 18L7 13M12 18L17 13"
+                stroke="#008080"
+                stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-              ></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M6.96967 16.4697C6.67678 16.7626 6.67678 17.2374 6.96967 17.5303C7.26256 17.8232 7.73744 17.8232 8.03033 17.5303L6.96967 16.4697ZM13.0303 12.5303C13.3232 12.2374 13.3232 11.7626 13.0303 11.4697C12.7374 11.1768 12.2626 11.1768 11.9697 11.4697L13.0303 12.5303ZM11.9697 11.4697C11.6768 11.7626 11.6768 12.2374 11.9697 12.5303C12.2626 12.8232 12.7374 12.8232 13.0303 12.5303L11.9697 11.4697ZM18.0303 7.53033C18.3232 7.23744 18.3232 6.76256 18.0303 6.46967C17.7374 6.17678 17.2626 6.17678 16.9697 6.46967L18.0303 7.53033ZM13.0303 11.4697C12.7374 11.1768 12.2626 11.1768 11.9697 11.4697C11.6768 11.7626 11.6768 12.2374 11.9697 12.5303L13.0303 11.4697ZM16.9697 17.5303C17.2626 17.8232 17.7374 17.8232 18.0303 17.5303C18.3232 17.2374 18.3232 16.7626 18.0303 16.4697L16.9697 17.5303ZM11.9697 12.5303C12.2626 12.8232 12.7374 12.8232 13.0303 12.5303C13.3232 12.2374 13.3232 11.7626 13.0303 11.4697L11.9697 12.5303ZM8.03033 6.46967C7.73744 6.17678 7.26256 6.17678 6.96967 6.46967C6.67678 6.76256 6.67678 7.23744 6.96967 7.53033L8.03033 6.46967ZM8.03033 17.5303L13.0303 12.5303L11.9697 11.4697L6.96967 16.4697L8.03033 17.5303ZM13.0303 12.5303L18.0303 7.53033L16.9697 6.46967L11.9697 11.4697L13.0303 12.5303ZM11.9697 12.5303L16.9697 17.5303L18.0303 16.4697L13.0303 11.4697L11.9697 12.5303ZM13.0303 11.4697L8.03033 6.46967L6.96967 7.53033L11.9697 12.5303L13.0303 11.4697Z"
-                  fill="#FF0000"
-                ></path>
-              </g>
-            </svg>
-          </td>
-        </ng-container>
+              ></path>
+            </g>
+          </svg>
+        </th>
+        <td mat-cell *matCellDef="let element" class="text-center">
+          {{ element.numberOfEmployees }}
+        </td>
+      </ng-container>
 
-        <ng-container matColumnDef="edit">
-          <th mat-header-cell *matHeaderCellDef class="text-center">EDIT</th>
-          <td mat-cell *matCellDef="let element" class="text-center">
-            <svg
-              class="edit-icon"
-              width="20px"
-              height="20px"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              (click)="onEditHotel(element.id)"
-              type="button"
-            >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g
-                id="SVGRepo_tracerCarrier"
+      <ng-container matColumnDef="availability">
+        <th mat-header-cell *matHeaderCellDef class="text-center">
+          AVAILABILITY
+        </th>
+        <td mat-cell *matCellDef="let element" class="text-center">
+          <svg
+            *ngIf="element.isAvailable"
+            height="16"
+            width="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                d="M4 12.6111L8.92308 17.5L20 6.5"
+                stroke="#008080"
+                stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-              ></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M14.3601 4.07866L15.2869 3.15178C16.8226 1.61607 19.3125 1.61607 20.8482 3.15178C22.3839 4.68748 22.3839 7.17735 20.8482 8.71306L19.9213 9.63993M14.3601 4.07866C14.3601 4.07866 14.4759 6.04828 16.2138 7.78618C17.9517 9.52407 19.9213 9.63993 19.9213 9.63993M14.3601 4.07866L12 6.43872M19.9213 9.63993L14.6607 14.9006L11.5613 18L11.4001 18.1612C10.8229 18.7383 10.5344 19.0269 10.2162 19.2751C9.84082 19.5679 9.43469 19.8189 9.00498 20.0237C8.6407 20.1973 8.25352 20.3263 7.47918 20.5844L4.19792 21.6782M4.19792 21.6782L3.39584 21.9456C3.01478 22.0726 2.59466 21.9734 2.31063 21.6894C2.0266 21.4053 1.92743 20.9852 2.05445 20.6042L2.32181 19.8021M4.19792 21.6782L2.32181 19.8021M2.32181 19.8021L3.41556 16.5208C3.67368 15.7465 3.80273 15.3593 3.97634 14.995C4.18114 14.5653 4.43213 14.1592 4.7249 13.7838C4.97308 13.4656 5.26166 13.1771 5.83882 12.5999L8.5 9.93872"
-                  stroke="#008080"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                ></path>
-              </g>
-            </svg>
-          </td>
-        </ng-container>
+              ></path>
+            </g>
+          </svg>
+          <svg
+            *ngIf="!element.isAvailable"
+            height="16"
+            width="16"
+            viewBox="0 -0.5 25 25"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                d="M6.96967 16.4697C6.67678 16.7626 6.67678 17.2374 6.96967 17.5303C7.26256 17.8232 7.73744 17.8232 8.03033 17.5303L6.96967 16.4697ZM13.0303 12.5303C13.3232 12.2374 13.3232 11.7626 13.0303 11.4697C12.7374 11.1768 12.2626 11.1768 11.9697 11.4697L13.0303 12.5303ZM11.9697 11.4697C11.6768 11.7626 11.6768 12.2374 11.9697 12.5303C12.2626 12.8232 12.7374 12.8232 13.0303 12.5303L11.9697 11.4697ZM18.0303 7.53033C18.3232 7.23744 18.3232 6.76256 18.0303 6.46967C17.7374 6.17678 17.2626 6.17678 16.9697 6.46967L18.0303 7.53033ZM13.0303 11.4697C12.7374 11.1768 12.2626 11.1768 11.9697 11.4697C11.6768 11.7626 11.6768 12.2374 11.9697 12.5303L13.0303 11.4697ZM16.9697 17.5303C17.2626 17.8232 17.7374 17.8232 18.0303 17.5303C18.3232 17.2374 18.3232 16.7626 18.0303 16.4697L16.9697 17.5303ZM11.9697 12.5303C12.2626 12.8232 12.7374 12.8232 13.0303 12.5303C13.3232 12.2374 13.3232 11.7626 13.0303 11.4697L11.9697 12.5303ZM8.03033 6.46967C7.73744 6.17678 7.26256 6.17678 6.96967 6.46967C6.67678 6.76256 6.67678 7.23744 6.96967 7.53033L8.03033 6.46967ZM8.03033 17.5303L13.0303 12.5303L11.9697 11.4697L6.96967 16.4697L8.03033 17.5303ZM13.0303 12.5303L18.0303 7.53033L16.9697 6.46967L11.9697 11.4697L13.0303 12.5303ZM11.9697 12.5303L16.9697 17.5303L18.0303 16.4697L13.0303 11.4697L11.9697 12.5303ZM13.0303 11.4697L8.03033 6.46967L6.96967 7.53033L11.9697 12.5303L13.0303 11.4697Z"
+                fill="#FF0000"
+              ></path>
+            </g>
+          </svg>
+        </td>
+      </ng-container>
 
-        <ng-container matColumnDef="remove">
-          <th mat-header-cell *matHeaderCellDef class="text-center">REMOVE</th>
-          <td mat-cell *matCellDef="let element" class="text-center">
-            <svg
-              width="20px"
-              height="20px"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              (click)="openDialog(element.id)"
-              type="button"
-            >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g
-                id="SVGRepo_tracerCarrier"
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef class="text-center">EDIT</th>
+        <td mat-cell *matCellDef="let element" class="text-center">
+          <svg
+            class="edit-icon"
+            width="20px"
+            height="20px"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            (click)="onEditHotel(element.id)"
+            type="button"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                d="M14.3601 4.07866L15.2869 3.15178C16.8226 1.61607 19.3125 1.61607 20.8482 3.15178C22.3839 4.68748 22.3839 7.17735 20.8482 8.71306L19.9213 9.63993M14.3601 4.07866C14.3601 4.07866 14.4759 6.04828 16.2138 7.78618C17.9517 9.52407 19.9213 9.63993 19.9213 9.63993M14.3601 4.07866L12 6.43872M19.9213 9.63993L14.6607 14.9006L11.5613 18L11.4001 18.1612C10.8229 18.7383 10.5344 19.0269 10.2162 19.2751C9.84082 19.5679 9.43469 19.8189 9.00498 20.0237C8.6407 20.1973 8.25352 20.3263 7.47918 20.5844L4.19792 21.6782M4.19792 21.6782L3.39584 21.9456C3.01478 22.0726 2.59466 21.9734 2.31063 21.6894C2.0266 21.4053 1.92743 20.9852 2.05445 20.6042L2.32181 19.8021M4.19792 21.6782L2.32181 19.8021M2.32181 19.8021L3.41556 16.5208C3.67368 15.7465 3.80273 15.3593 3.97634 14.995C4.18114 14.5653 4.43213 14.1592 4.7249 13.7838C4.97308 13.4656 5.26166 13.1771 5.83882 12.5999L8.5 9.93872"
+                stroke="#008080"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              ></path>
+            </g>
+          </svg>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="remove">
+        <th mat-header-cell *matHeaderCellDef class="text-center">REMOVE</th>
+        <td mat-cell *matCellDef="let element" class="text-center">
+          <svg
+            width="20px"
+            height="20px"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            (click)="openDialog(element.id)"
+            type="button"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                d="M4 6H20M16 6L15.7294 5.18807C15.4671 4.40125 15.3359 4.00784 15.0927 3.71698C14.8779 3.46013 14.6021 3.26132 14.2905 3.13878C13.9376 3 13.523 3 12.6936 3H11.3064C10.477 3 10.0624 3 9.70951 3.13878C9.39792 3.26132 9.12208 3.46013 8.90729 3.71698C8.66405 4.00784 8.53292 4.40125 8.27064 5.18807L8 6M18 6V16.2C18 17.8802 18 18.7202 17.673 19.362C17.3854 19.9265 16.9265 20.3854 16.362 20.673C15.7202 21 14.8802 21 13.2 21H10.8C9.11984 21 8.27976 21 7.63803 20.673C7.07354 20.3854 6.6146 19.9265 6.32698 19.362C6 18.7202 6 17.8802 6 16.2V6M14 10V17M10 10V17"
+                stroke="#008080"
+                stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-              ></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M4 6H20M16 6L15.7294 5.18807C15.4671 4.40125 15.3359 4.00784 15.0927 3.71698C14.8779 3.46013 14.6021 3.26132 14.2905 3.13878C13.9376 3 13.523 3 12.6936 3H11.3064C10.477 3 10.0624 3 9.70951 3.13878C9.39792 3.26132 9.12208 3.46013 8.90729 3.71698C8.66405 4.00784 8.53292 4.40125 8.27064 5.18807L8 6M18 6V16.2C18 17.8802 18 18.7202 17.673 19.362C17.3854 19.9265 16.9265 20.3854 16.362 20.673C15.7202 21 14.8802 21 13.2 21H10.8C9.11984 21 8.27976 21 7.63803 20.673C7.07354 20.3854 6.6146 19.9265 6.32698 19.362C6 18.7202 6 17.8802 6 16.2V6M14 10V17M10 10V17"
-                  stroke="#008080"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ></path>
-              </g>
-            </svg>
-          </td>
-        </ng-container>
+              ></path>
+            </g>
+          </svg>
+        </td>
+      </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 
-        <tr *ngIf="!dataSource || dataSource.length === 0">
-          <td class="text-center" [attr.colspan]="displayedColumns.length">
-            The hotel doesn't have any users.
-          </td>
-        </tr>
+      <tr *ngIf="!dataSource || dataSource.length === 0">
+        <td class="text-center" [attr.colspan]="displayedColumns.length">
+          The hotel doesn't have any users.
+        </td>
+      </tr>
 
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      </table>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
 
-      <mat-paginator
-        [length]="totalItemCount"
-        [pageSizeOptions]="[5, 10, 20]"
-        [pageSize]="pageSize"
-        [pageIndex]="pageIndex - 1"
-        (page)="onPageChange($event)"
-        showFirstLastButtons
-        aria-label="Paginator for users"
-      >
-      </mat-paginator>
-    </div>
+    <mat-paginator
+      [length]="totalItemCount"
+      [pageSizeOptions]="[5, 10, 20]"
+      [pageSize]="pageSize"
+      [pageIndex]="pageIndex - 1"
+      (page)="onPageChange($event)"
+      showFirstLastButtons
+      aria-label="Paginator for users"
+    >
+    </mat-paginator>
   </div>
 </ng-template>

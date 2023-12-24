@@ -12,11 +12,12 @@ import { MatSelectModule } from '@angular/material/select';
 
 import { UserEditRole } from '../user.model';
 import { UserService } from '../user.service';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-edit-user-role',
   templateUrl: './edit-user-role.component.html',
-  styleUrls: ['./edit-user-role.component.css'],
+  styleUrls: ['./edit-user-role.component.scss'],
   standalone: true,
   imports: [
     MatProgressSpinnerModule,
@@ -28,6 +29,7 @@ import { UserService } from '../user.service';
     RouterModule,
     MatInputModule,
     MatSelectModule,
+    MatButtonModule,
   ],
 })
 export class EditUserRoleComponent implements OnInit {
