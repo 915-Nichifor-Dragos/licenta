@@ -5,20 +5,22 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatOptionModule } from '@angular/material/core';
+import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { AuthService } from '../auth.service';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
+  styleUrls: ['./register.component.scss'],
   standalone: true,
   imports: [
     MatFormFieldModule,
@@ -26,6 +28,10 @@ import { AuthService } from '../auth.service';
     ReactiveFormsModule,
     MatDatepickerModule,
     MatOptionModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    RouterModule,
+    MatButtonModule,
   ],
 })
 export class RegisterComponent {
