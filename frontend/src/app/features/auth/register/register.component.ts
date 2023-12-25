@@ -255,26 +255,15 @@ export class RegisterComponent {
       return;
     }
 
+    if (confirmPasswordControl.hasError('required')) {
+      return 'You must enter a value for confirm password';
+    }
+
     if (confirmPasswordControl.hasError('passwordMismatch')) {
       return 'Must be the same as the password';
     }
 
     return '';
-  }
-
-  passwordConfirmationValidator(formGroup: FormGroup) {
-    const password = formGroup.get('password');
-    const confirmPassword = formGroup.get('confirmPassword');
-
-    if (
-      password &&
-      confirmPassword &&
-      password.value !== confirmPassword.value
-    ) {
-      confirmPassword.setErrors({ passwordMismatch: true });
-    } else {
-      confirmPassword?.setErrors(null);
-    }
   }
 
   getAddressErrorMessage() {
@@ -318,6 +307,23 @@ export class RegisterComponent {
     }
 
     return '';
+  }
+
+  passwordConfirmationValidator(formGroup: FormGroup) {
+    const passwordControl = formGroup.get('password');
+    const confirmPasswordControl = formGroup.get('confirmPassword');
+    console.log(confirmPasswordControl);
+    if (!passwordControl || !confirmPasswordControl) {
+      return;
+    }
+
+    if (passwordControl.value !== confirmPasswordControl.value) {
+      confirmPasswordControl.setErrors({ passwordMismatch: true });
+    } else {
+      if (confirmPasswordControl.getError('passwordMismatch')) {
+        confirmPasswordControl.setErrors({ passwordMismatch: false });
+      }
+    }
   }
 
   createAccount() {
