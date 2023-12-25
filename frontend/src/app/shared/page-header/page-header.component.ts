@@ -2,16 +2,10 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-page-header',
-  template: `
-    <h1>{{ title }}</h1>
-    <ng-content select="[button]"></ng-content>
-  `,
+  template: ` <h1>{{ title }}</h1> `,
   styles: [
     `
       :host {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
         text-align: center;
         margin-top: 24px;
         margin-bottom: 16px;
@@ -19,7 +13,6 @@ import { Component, Input } from '@angular/core';
 
       h1 {
         font-weight: bold;
-        text-align: center;
       }
     `,
   ],
