@@ -1,11 +1,21 @@
-mat-form-field {
-  min-width: 100%;
+:host {
+  margin-top: 2vh;
 }
 
-mat-hint {
-  color: teal;
+mat-form-field {
+  min-width: 100%;
+  margin-bottom: 1vh;
 }
 
 textarea {
   min-height: 125px;
+}
+
+mat-stepper {
+  margin-top: 3vh;
+  margin-bottom: 10vh;
+}
+
+form {
+  margin-top: 2vh;
 }
