@@ -1,56 +1,36 @@
-<nav id="custom-navbar" class="navbar navbar-expand-lg">
-  <a class="navbar-brand" routerLink="home">Hotel Management App</a>
+<mat-toolbar class="mat-elevation-z4">
+  <mat-toolbar-row>
+    <a mat-button routerLink="/">Hotel Management</a>
 
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarNavAltMarkup"
-    aria-controls="navbarNavAltMarkup"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <span class="spacer"></span>
 
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a
-        class="nav-username fw-bold"
-        routerLink="#"
-        *ngIf="this.username && this.role"
-        >{{ this.username }}</a
-      >
-      <a
-        class="nav-item"
-        routerLink="hotel-management"
-        *ngIf="this.role == 'Owner' || this.role == 'Manager'"
-        >Hotel Management</a
-      >
-      <a
-        class="nav-item"
-        routerLink="user-management"
-        *ngIf="this.role == 'Owner' || this.role == 'Manager'"
-        >User Management</a
-      >
-      <a class="nav-item" routerLink="#" *ngIf="this.role == 'Client'"
-        >Bookings</a
-      >
-      <a
-        class="nav-item"
-        routerLink="login"
-        *ngIf="!this.username && !this.role"
-        >Login</a
-      >
-      <a
-        class="nav-item"
-        routerLink="/auth/login"
-        (click)="logout()"
-        *ngIf="this.username && this.role"
-        >Logout</a
-      >
-    </div>
-  </div>
-</nav>
-
-<hr class="mx-5" />
+    <a mat-button routerLink="/profile" *ngIf="this.username && this.role">{{
+      username
+    }}</a>
+    <a
+      mat-button
+      routerLink="/hotel-management"
+      *ngIf="this.role == 'Owner' || this.role == 'Manager'"
+      >Hotel management</a
+    >
+    <a
+      mat-button
+      routerLink="/user-management"
+      *ngIf="this.role == 'Owner' || this.role == 'Manager'"
+      >User management</a
+    >
+    <a mat-button routerLink="/booking-management" *ngIf="this.role == 'Client'"
+      >Bookings</a
+    >
+    <a mat-button routerLink="/auth/login" *ngIf="!this.username && !this.role"
+      >Login</a
+    >
+    <a
+      mat-button
+      routerLink="/auth/login"
+      (click)="logout()"
+      *ngIf="this.username && this.role"
+      >Logout</a
+    >
+  </mat-toolbar-row>
+</mat-toolbar>

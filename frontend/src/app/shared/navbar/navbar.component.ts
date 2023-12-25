@@ -1,22 +1,28 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnDestroy } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, OnDestroy, inject } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
 import { AuthService } from 'src/app/features/auth/auth.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css'],
+  styleUrls: ['./navbar.component.scss'],
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, MatToolbarModule, MatButtonModule],
 })
 export class NavbarComponent implements OnDestroy {
+  authService = inject(AuthService);
+
   username: string = '';
   role: string = '';
-  userDetailsSubscription: Subscription | undefined;
+  userDetailsSubscription: Subscription;
 
-  constructor(private authService: AuthService) {
+  constructor() {
     this.userDetailsSubscription = this.authService
       .getUserClaims()
       .subscribe((details) => {
@@ -38,7 +44,7 @@ export class NavbarComponent implements OnDestroy {
 
   logout(): void {
     this.authService.logout().subscribe({
-      next: (response) => {
+      next: () => {
         this.username = '';
         this.role = '';
       },

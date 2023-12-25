@@ -18,7 +18,6 @@ import { Component, Input } from '@angular/core';
       }
 
       h1 {
-        margin-bottom: 12vh;
         font-weight: bold;
         text-align: center;
       }
