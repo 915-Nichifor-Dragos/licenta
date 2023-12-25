@@ -1,42 +1,22 @@
-<h1 class="text-center fw-bold mb-5">
-  Welcome to Hotel Management System, please login!
-</h1>
+<h1>Welcome to Hotel Management System, please login!</h1>
 
 <form [formGroup]="loginForm" (ngSubmit)="login()">
-  <div class="mb-3">
-    <mat-form-field appearance="outline">
-      <mat-label>Username</mat-label>
-      <input matInput type="text" formControlName="username" id="username" />
-    </mat-form-field>
-  </div>
+  <mat-form-field appearance="outline">
+    <mat-label>Username</mat-label>
+    <input matInput type="text" formControlName="username" id="username" />
+    <mat-error>{{ getUsernameErrorMessage() }}</mat-error>
+  </mat-form-field>
 
-  <div class="mb-3">
-    <mat-form-field appearance="outline">
-      <mat-label>Password</mat-label>
-      <input
-        matInput
-        type="password"
-        formControlName="password"
-        id="password"
-      />
-    </mat-form-field>
-  </div>
+  <mat-form-field appearance="outline">
+    <mat-label>Password</mat-label>
+    <input matInput type="password" formControlName="password" id="password" />
+    <mat-error>{{ getPasswordErrorMessage() }}</mat-error>
+  </mat-form-field>
 
-  <div class="row">
-    <button class="col m-1" mat-raised-button>Login</button>
-    <button
-      class="col m-1"
-      mat-raised-button
-      color="primary"
-      routerLink="/auth/register"
-    >
+  <div class="button-container">
+    <button mat-raised-button>Login</button>
+    <button mat-raised-button color="primary" routerLink="/auth/register">
       Register
     </button>
   </div>
 </form>
-
-<hr class="mt-5" />
-
-<p class="text-center fw-light registration-info-text">
-  Registrations will be done only as a Client
-</p>

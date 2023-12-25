@@ -1,15 +1,3 @@
-mat-toolbar {
-  margin-bottom: 8px;
-}
-
-mat-toolbar-row {
-  gap: 8px;
-}
-
-.spacer {
-  flex: 1;
-}
-
 :host {
   display: grid;
   min-height: 100vh;

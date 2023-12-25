@@ -2,12 +2,13 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { AuthService } from '../auth.service';
-import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-login',
@@ -15,10 +16,10 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./login.component.scss'],
   standalone: true,
   imports: [
+    RouterModule,
+    ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule,
-    RouterModule,
     MatButtonModule,
   ],
 })
@@ -32,6 +33,22 @@ export class LoginComponent {
     username: ['', Validators.required],
     password: ['', Validators.required],
   });
+
+  getUsernameErrorMessage() {
+    if (this.loginForm.get('username')!.hasError('required')) {
+      return 'You must enter a value for username';
+    }
+
+    return '';
+  }
+
+  getPasswordErrorMessage() {
+    if (this.loginForm.get('password')!.hasError('required')) {
+      return 'You must enter a value for password';
+    }
+
+    return '';
+  }
 
   login() {
     if (this.loginForm.valid) {

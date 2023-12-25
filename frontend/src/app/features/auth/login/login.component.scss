@@ -1,17 +1,27 @@
 :host {
   max-width: 60vh;
-  margin-top: 5vh;
 }
 
-.register-anchor {
-  text-decoration: none;
-  color: teal;
-}
-
-.registration-info-text {
-  font-size: 12px;
+h1 {
+  margin-top: 2vh;
+  margin-bottom: 8vh;
+  font-weight: bold;
+  text-align: center;
 }
 
 mat-form-field {
   min-width: 100%;
+  margin-bottom: 2vh;
+}
+
+.button-container {
+  margin-top: 3vh;
+  display: flex;
+  flex-direction: row;
+  gap: 2vh;
+  justify-content: center;
+}
+
+button {
+  flex: 1;
 }

@@ -2,8 +2,9 @@ import { inject } from '@angular/core';
 import { Routes } from '@angular/router';
 
 import { RoleGuard } from '../services/role-guard.service';
-import { HomeComponent } from '../features/home/home.component';
 import { AuthService } from '../features/auth/auth.service';
+
+import { HomeComponent } from '../features/home/home.component';
 
 export const routes: Routes = [
   {
