@@ -3,18 +3,14 @@
 
 html,
 body {
-  height: 100%;
   margin: 0;
   padding: 0;
 }
 
-body {
-  min-height: 100%;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
 .back-button {
   font-size: 12px;
+  font-weight: lighter;
+  color: grey;
 }
 
 .loading-spinner {

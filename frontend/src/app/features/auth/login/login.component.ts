@@ -10,6 +10,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { AuthService } from '../auth.service';
 
+import { AppPageHeaderComponent } from 'src/app/shared/page-header/page-header.component';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,6 +23,7 @@ import { AuthService } from '../auth.service';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    AppPageHeaderComponent,
   ],
 })
 export class LoginComponent {

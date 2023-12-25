@@ -17,6 +17,8 @@ import { AuthService } from '../auth.service';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 
+import { AppPageHeaderComponent } from 'src/app/shared/page-header/page-header.component';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -32,6 +34,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatSelectModule,
     RouterModule,
     MatButtonModule,
+    AppPageHeaderComponent,
   ],
 })
 export class RegisterComponent {
