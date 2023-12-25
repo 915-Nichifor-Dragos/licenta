@@ -11,7 +11,13 @@ import { AuthService } from 'src/app/features/auth/auth.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss'],
+  styles: [
+    `
+      .spacer {
+        flex: 1;
+      }
+    `,
+  ],
   standalone: true,
   imports: [CommonModule, RouterModule, MatToolbarModule, MatButtonModule],
 })
