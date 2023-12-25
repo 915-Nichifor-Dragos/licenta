@@ -5,6 +5,7 @@ import { Router, RouterModule } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -23,6 +24,7 @@ import { AppPageHeaderComponent } from 'src/app/shared/page-header/page-header.c
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatIconModule,
     AppPageHeaderComponent,
   ],
 })
@@ -31,6 +33,8 @@ export class LoginComponent {
   authService = inject(AuthService);
   snackBar = inject(MatSnackBar);
   router = inject(Router);
+
+  hide = true;
 
   loginForm = this.formBuilder.group({
     username: ['', Validators.required],

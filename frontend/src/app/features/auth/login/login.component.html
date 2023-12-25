@@ -11,13 +11,33 @@
 
   <mat-form-field appearance="outline">
     <mat-label>Password</mat-label>
-    <input matInput type="password" formControlName="password" id="password" />
+    <input
+      matInput
+      [type]="hide ? 'password' : 'text'"
+      formControlName="password"
+      id="password"
+    />
+    <button
+      mat-icon-button
+      type="button"
+      matSuffix
+      (click)="hide = !hide"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide"
+    >
+      <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
     <mat-error>{{ getPasswordErrorMessage() }}</mat-error>
   </mat-form-field>
 
   <div class="button-container">
     <button mat-raised-button>Login</button>
-    <button mat-raised-button color="primary" routerLink="/auth/register">
+    <button
+      mat-raised-button
+      color="primary"
+      routerLink="/auth/register"
+      type="button"
+    >
       Register
     </button>
   </div>
