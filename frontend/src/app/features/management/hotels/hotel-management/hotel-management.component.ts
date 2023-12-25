@@ -1,15 +1,16 @@
 import { Component, ViewChild, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
-import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { HotelService } from '../hotel.service';
 import { HotelManagementHotelListing } from '../hotel.model';
 import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialog.component';
+import { AppPageHeaderComponent } from 'src/app/shared/page-header/page-header.component';
 
 @Component({
   selector: 'app-hotel-management',
@@ -22,6 +23,7 @@ import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialo
     MatTableModule,
     MatPaginatorModule,
     RouterModule,
+    AppPageHeaderComponent,
   ],
 })
 export class HotelManagementComponent {
@@ -38,7 +40,7 @@ export class HotelManagementComponent {
     'remove',
   ];
 
-  dataSource!: HotelManagementHotelListing[];
+  dataSource: HotelManagementHotelListing[] = [];
 
   totalItemCount = 0;
   pageSize = 5;
@@ -56,12 +58,15 @@ export class HotelManagementComponent {
 
   openDialog(hotelId: string): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      data: 'hotel',
+      data: {
+        title: 'Delete Confirmation',
+        content: 'Are you sure you want to delete this hotel?',
+      },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result == true) {
-        this.hotelService.deleteHotel(hotelId).subscribe((response) => {
+        this.hotelService.deleteHotel(hotelId).subscribe(() => {
           this.fetchHotelData();
         });
       }
@@ -87,6 +92,8 @@ export class HotelManagementComponent {
   }
 
   fetchHotelData() {
+    this.dataLoaded = false;
+
     this.hotelService
       .getHotels(
         this.pageSize,

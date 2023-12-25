@@ -1,0 +1,19 @@
+:host {
+  text-align: center;
+}
+
+.custom-dialog {
+  padding: 2vh;
+}
+
+.button-container {
+  margin-top: 3vh;
+  display: flex;
+  flex-direction: row;
+  gap: 2vh;
+  justify-content: center;
+}
+
+button {
+  flex: 1;
+}
