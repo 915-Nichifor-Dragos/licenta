@@ -1,53 +1,30 @@
 <ng-container *ngIf="!dataLoaded; else edituser">
-  <mat-progress-spinner
-    class="loading-spinner"
-    color="accent"
-    mode="indeterminate"
-    value="4"
-  >
+  <mat-progress-spinner class="loading-spinner" mode="indeterminate" value="4">
   </mat-progress-spinner>
 </ng-container>
 
-<ng-template #edituser class="pb-3">
-  <a class="text-muted back-button" routerLink="/user-management">Back</a>
+<ng-template #edituser>
+  <a class="back-button" routerLink="/user-management">Back</a>
 
-  <h6 class="text-center fw-bold mb-4">Edit user role</h6>
+  <app-page-header title="Edit user role"></app-page-header>
 
-  <form [formGroup]="userForm" (ngSubmit)="onSubmit()" id="edit-role-form">
-    <div class="row p-5">
-      <div class="col-4"></div>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="edit-role-form">
+    <mat-form-field appearance="outline">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username" (disabled)="(true)" />
+    </mat-form-field>
 
-      <div class="col-4">
-        <div class="mb-4">
-          <mat-form-field appearance="outline">
-            <mat-label>Username</mat-label>
-            <input matInput formControlName="username" (disabled)="(true)" />
-          </mat-form-field>
-        </div>
+    <mat-form-field appearance="outline">
+      <mat-label>Role</mat-label>
+      <mat-select matInput formControlName="role" required>
+        <mat-option [value]="2">Manager</mat-option>
+        <mat-option [value]="1">Employee</mat-option>
+      </mat-select>
+      <mat-hint>Select the new role</mat-hint>
+    </mat-form-field>
 
-        <div class="mb-4">
-          <mat-form-field appearance="outline">
-            <mat-label>Role</mat-label>
-            <mat-select matInput formControlName="role" required>
-              <mat-option [value]="2">Manager</mat-option>
-              <mat-option [value]="1">Employee</mat-option>
-            </mat-select>
-            <mat-hint>Select the new role</mat-hint>
-          </mat-form-field>
-        </div>
-
-        <button
-          type="submit"
-          id="submit"
-          mat-raised-button
-          color="primary"
-          class="w-100"
-        >
-          Save changes
-        </button>
-      </div>
-
-      <div class="col-4"></div>
-    </div>
+    <button type="submit" mat-raised-button color="primary">
+      Save changes
+    </button>
   </form>
 </ng-template>
