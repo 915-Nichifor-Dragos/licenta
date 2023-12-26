@@ -4,27 +4,29 @@
 </ng-container>
 
 <ng-template #edituser>
-  <a class="back-button" routerLink="/user-management">Back</a>
+  <div id="edit-user-container">
+    <a class="back-button" routerLink="/user-management">Back</a>
 
-  <app-page-header title="Edit user role"></app-page-header>
+    <app-page-header title="Edit user role"></app-page-header>
 
-  <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="edit-role-form">
-    <mat-form-field appearance="outline">
-      <mat-label>Username</mat-label>
-      <input matInput formControlName="username" (disabled)="(true)" />
-    </mat-form-field>
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="edit-role-form">
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username" (disabled)="(true)" />
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Role</mat-label>
-      <mat-select matInput formControlName="role" required>
-        <mat-option [value]="2">Manager</mat-option>
-        <mat-option [value]="1">Employee</mat-option>
-      </mat-select>
-      <mat-hint>Select the new role</mat-hint>
-    </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Role</mat-label>
+        <mat-select matInput formControlName="role" required>
+          <mat-option [value]="2">Manager</mat-option>
+          <mat-option [value]="1">Employee</mat-option>
+        </mat-select>
+        <mat-hint>Select the new role</mat-hint>
+      </mat-form-field>
 
-    <button type="submit" mat-raised-button color="primary">
-      Save changes
-    </button>
-  </form>
+      <button type="submit" mat-raised-button color="primary">
+        Save changes
+      </button>
+    </form>
+  </div>
 </ng-template>
