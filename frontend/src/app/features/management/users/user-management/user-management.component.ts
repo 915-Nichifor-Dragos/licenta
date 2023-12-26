@@ -8,12 +8,11 @@ import {
   switchMap,
 } from 'rxjs';
 import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-
-import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -22,10 +21,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialog.component';
+
 import { UserManagementUserListing } from '../user.model';
 import { UserManagementHotelListing } from '../../hotels/hotel.model';
+
 import { HotelService } from '../../hotels/hotel.service';
 import { UserService } from '../user.service';
+
+import { AppPageHeaderComponent } from 'src/app/shared/page-header/page-header.component';
 
 @Component({
   selector: 'app-user-management',
@@ -44,9 +47,10 @@ import { UserService } from '../user.service';
     MatButtonModule,
     RouterModule,
     MatIconModule,
+    AppPageHeaderComponent,
   ],
 })
-export class UserManagementComponent {
+export class UserManagementComponent implements OnInit {
   displayedColumns: string[] = [
     'firstName',
     'lastName',
@@ -102,12 +106,15 @@ export class UserManagementComponent {
 
   openDialog(userId: string): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      data: 'user',
+      data: {
+        title: 'Delete Confirmation',
+        content: 'Are you sure you want to delete this user?',
+      },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result == true) {
-        this.userService.deleteUser(userId).subscribe((response) => {
+        this.userService.deleteUser(userId).subscribe(() => {
           this.fetchUserData();
         });
       }
@@ -155,6 +162,7 @@ export class UserManagementComponent {
   }
 
   fetchUserData() {
+    this.dataLoaded = false;
     this.userService
       .getSubordinates(
         this.selectedHotelId,
@@ -166,6 +174,7 @@ export class UserManagementComponent {
       .subscribe((data: any) => {
         this.dataSource.data = data.users;
         this.totalItemCount = data.count;
+        this.dataLoaded = true;
       });
   }
 

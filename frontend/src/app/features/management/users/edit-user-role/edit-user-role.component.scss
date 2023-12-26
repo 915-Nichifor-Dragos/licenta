@@ -1,7 +1,13 @@
-mat-form-field {
-  min-width: 100%;
-}
-
 mat-hint {
   color: teal;
+}
+
+.edit-role-form {
+  margin-top: 20vh;
+  display: grid;
+  justify-content: center;
+}
+
+button {
+  margin-top: 2vh;
 }

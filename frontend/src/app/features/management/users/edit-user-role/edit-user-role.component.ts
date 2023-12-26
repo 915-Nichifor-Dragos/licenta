@@ -9,10 +9,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
 
 import { UserEditRole } from '../user.model';
+
 import { UserService } from '../user.service';
-import { MatButtonModule } from '@angular/material/button';
+
+import { AppPageHeaderComponent } from 'src/app/shared/page-header/page-header.component';
 
 @Component({
   selector: 'app-edit-user-role',
@@ -30,6 +33,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
+    AppPageHeaderComponent,
   ],
 })
 export class EditUserRoleComponent implements OnInit {
@@ -75,14 +79,14 @@ export class EditUserRoleComponent implements OnInit {
       };
 
       this.userService.updateUserRole(userData).subscribe(
-        (response: any) => {
-          this.snackBar.open('Update was successful', 'Close', {
+        () => {
+          this.snackBar.open('Role update was successful', 'Close', {
             duration: 2000,
           });
           this.router.navigate(['/user-management']);
         },
-        (error: any) => {
-          this.snackBar.open('Update failed', 'Close', {
+        () => {
+          this.snackBar.open('Role update failed', 'Close', {
             duration: 2000,
           });
         }
