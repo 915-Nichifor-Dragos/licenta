@@ -100,7 +100,6 @@ export class UserManagementComponent implements OnInit {
       .subscribe((options: UserManagementHotelListing[]) => {
         this.options = options;
         this.fetchUserData();
-        this.dataLoaded = true;
       });
   }
 

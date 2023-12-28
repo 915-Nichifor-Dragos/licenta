@@ -17,7 +17,7 @@ import { AuthService } from 'src/app/features/auth/auth.service';
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
-  styleUrls: ['./add-user.component.css'],
+  styleUrls: ['./add-user.component.scss'],
   standalone: true,
   imports: [
     MatFormFieldModule,
