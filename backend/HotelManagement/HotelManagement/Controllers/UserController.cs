@@ -1,3 +1,4 @@
+using HotelManagement.BusinessLogic.Converters;
 using HotelManagement.BusinessLogic.ILogic;
 using HotelManagement.Models.Constants;
 using HotelManagement.Models.DataModels;
@@ -174,6 +175,41 @@ public class UserController : ControllerBase{
         {
             return BadRequest();
         }
+    }
+
+    [HttpPost]
+    [AuthorizeRoles(Role.Owner, Role.Manager)]
+    public async Task<IActionResult> AddUser(UserAddViewModel addUserViewModel)
+    {
+        var validationResults = addUserViewModel.Validate();
+
+        var user = UserConverter.FromUserAddViewModelToUser(addUserViewModel);
+
+        if (!validationResults.Any())
+        {
+            var validityOutcome = _userLogic.CheckValidity(user);
+
+            if (validityOutcome == UserValidityOutcomes.InvalidEmail)
+            {
+                return BadRequest("Invalid email");
+            }
+
+            if (validityOutcome == UserValidityOutcomes.InvalidUsername)
+            {
+                return BadRequest("Invalid username");
+            }
+
+            var host = HttpContext.Request.Host.Host;
+            var port = HttpContext.Request.Host.Port ?? 80;
+
+            await _userLogic.CreateUser(user, host, port);
+
+            var hotel = await _hotelLogic.GetById(addUserViewModel.HotelId);
+
+            await _hotelLogic.AddUserToHotel(hotel, user);
+        }
+
+        return Ok();
     }
 
     [HttpDelete]

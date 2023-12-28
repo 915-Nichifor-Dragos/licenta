@@ -32,27 +32,6 @@ public class UserConverter
             LastName = user.LastName,
         };
     }
-
-    public static User FromUserViewModelToUser(UserViewModel user, int roleId)
-    {
-        return new User
-        {
-            Username = user.Username,
-            Password = PasswordEncrypter.Hash(user.Password),
-            FirstName = user.FirstName,
-            LastName = user.LastName,
-            Email = user.Email,
-            BirthDate = user.BirthDate.ToDateTime(TimeOnly.Parse("10:00 PM")),
-            Gender = user.Gender,
-            RoleId = roleId,
-            Address = user.Address,
-            Bio = user.Bio,
-            ImageUrl = user.ImageUrl,
-            IsActive = user.IsActive,
-            ActivationToken = user.ActivationToken,
-            TokenGenerationTime = user.TokenGenerationTime,
-        };
-    }
     
     public static User FromUserRegisterViewModelToUser(RegisterViewModel user, int roleId)
     {
@@ -69,6 +48,27 @@ public class UserConverter
             Address = user.Address,
             Bio = user.Bio,
 
+        };
+    }
+
+    public static User FromUserAddViewModelToUser(UserAddViewModel userAddViewModel)
+    {
+        if (userAddViewModel == null)
+        {
+            return null;
+        }
+
+        return new User
+        {
+            Username = userAddViewModel.Username,
+            Password = PasswordEncrypter.Hash(userAddViewModel.Password),
+            FirstName = userAddViewModel.FirstName,
+            LastName = userAddViewModel.LastName,
+            Email = userAddViewModel.Email,
+            BirthDate = userAddViewModel.BirthDate.ToDateTime(TimeOnly.Parse("10:00 PM")),
+            Gender = userAddViewModel.Gender,
+            RoleId = userAddViewModel.RoleId,
+            IsDeleted = false
         };
     }
 }

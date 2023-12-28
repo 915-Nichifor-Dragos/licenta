@@ -14,12 +14,9 @@ public class UserUpdateViewModel
     public string LastName { get; set; }
 
     [Required]
-    [EmailAddress(ErrorMessage = "Invalid email address")]
     public string Email { get; set; }
 
     [Required]
-    [DateAfter1900(ErrorMessage = "Date should be after 1900")]
-    [IsOver18]
     public DateOnly BirthDate { get; set; }
 
     [Required]

@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -32,6 +32,19 @@ export class UserService {
     }
 
     return this.http.get<any>(url, { params });
+  }
+
+  addUser(userData: any): Observable<any> {
+    const registerUrl = `${this.baseUrl}/users`;
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      withCredentials: true,
+    };
+    console.log(userData);
+    return this.http.post(registerUrl, userData, httpOptions);
   }
 
   deleteUser(userId: string): Observable<any> {

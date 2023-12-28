@@ -1,15 +1,21 @@
-.registration-info-text {
-  font-size: 12px;
+:host {
+  margin-top: 2vh;
 }
 
 mat-form-field {
   min-width: 100%;
-}
-
-mat-hint {
-  color: teal;
+  margin-bottom: 1vh;
 }
 
 textarea {
   min-height: 125px;
+}
+
+form {
+  margin-top: 5vh;
+  margin-bottom: 10vh;
+}
+
+button {
+  width: 100%;
 }
