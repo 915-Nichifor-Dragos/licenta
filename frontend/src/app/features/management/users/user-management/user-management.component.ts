@@ -29,6 +29,7 @@ import { HotelService } from '../../hotels/hotel.service';
 import { UserService } from '../user.service';
 
 import { AppPageHeaderComponent } from 'src/app/shared/page-header/page-header.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-management',
@@ -37,6 +38,7 @@ import { AppPageHeaderComponent } from 'src/app/shared/page-header/page-header.c
   standalone: true,
   imports: [
     CommonModule,
+    RouterModule,
     MatProgressSpinnerModule,
     MatFormFieldModule,
     MatInputModule,
@@ -45,7 +47,6 @@ import { AppPageHeaderComponent } from 'src/app/shared/page-header/page-header.c
     MatTableModule,
     MatPaginatorModule,
     MatButtonModule,
-    RouterModule,
     MatIconModule,
     AppPageHeaderComponent,
   ],
@@ -61,6 +62,7 @@ export class UserManagementComponent implements OnInit {
     'edit',
     'remove',
   ];
+
   dataSource = new MatTableDataSource<UserManagementUserListing>();
 
   myControl = new FormControl('');
@@ -86,6 +88,7 @@ export class UserManagementComponent implements OnInit {
   userService = inject(UserService);
   dialog = inject(MatDialog);
   router = inject(Router);
+  snackBar = inject(MatSnackBar);
 
   ngOnInit() {
     this.options = [];
@@ -114,7 +117,14 @@ export class UserManagementComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result == true) {
         this.userService.deleteUser(userId).subscribe(() => {
+          this.snackBar.open('User was deleted successfully', 'Close', {
+            duration: 2000,
+          });
           this.fetchUserData();
+        });
+      } else {
+        this.snackBar.open('Could not delete the user', 'Close', {
+          duration: 2000,
         });
       }
     });

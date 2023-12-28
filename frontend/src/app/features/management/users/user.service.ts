@@ -43,7 +43,7 @@ export class UserService {
       }),
       withCredentials: true,
     };
-    console.log(userData);
+
     return this.http.post(registerUrl, userData, httpOptions);
   }
 

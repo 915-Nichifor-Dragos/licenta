@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -13,7 +13,7 @@ import {
   startWith,
   switchMap,
 } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -31,28 +31,30 @@ import { HotelService } from '../../hotels/hotel.service';
 
 import { AppPageHeaderComponent } from 'src/app/shared/page-header/page-header.component';
 import { UserManagementHotelListing } from '../../hotels/hotel.model';
+
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
   styleUrls: ['./add-user.component.scss'],
   standalone: true,
   imports: [
-    MatFormFieldModule,
+    CommonModule,
+    RouterModule,
     ReactiveFormsModule,
+    MatFormFieldModule,
     MatOptionModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,
     MatSelectModule,
-    AppPageHeaderComponent,
     MatButtonModule,
     MatAutocompleteModule,
     MatIconModule,
     MatOptionModule,
-    CommonModule,
+    AppPageHeaderComponent,
   ],
 })
-export class AddUserComponent {
+export class AddUserComponent implements OnInit {
   formBuilder = inject(FormBuilder);
   userService = inject(UserService);
   hotelService = inject(HotelService);
@@ -340,7 +342,7 @@ export class AddUserComponent {
   passwordConfirmationValidator(formGroup: FormGroup) {
     const passwordControl = formGroup.get('password');
     const confirmPasswordControl = formGroup.get('confirmPassword');
-    console.log(confirmPasswordControl);
+
     if (!passwordControl || !confirmPasswordControl) {
       return;
     }

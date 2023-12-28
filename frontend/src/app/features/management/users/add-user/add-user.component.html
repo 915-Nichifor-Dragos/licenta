@@ -1,8 +1,8 @@
-<a class="text-muted back-button" routerLink="/user-management">Back</a>
+<a class="back-button" routerLink="/user-management">Back</a>
 
 <app-page-header title="Employee Registration"></app-page-header>
 
-<form [formGroup]="userFormGroup" (ngSubmit)="createUser()" id="user-form">
+<form [formGroup]="userFormGroup" (ngSubmit)="createUser()">
   <mat-form-field appearance="outline">
     <mat-label>Username</mat-label>
     <input
@@ -137,5 +137,12 @@
     <mat-error>{{ getHotelErrorMessage() }}</mat-error>
   </mat-form-field>
 
-  <button mat-raised-button color="primary" type="submit">Add</button>
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="userFormGroup.invalid"
+  >
+    Add
+  </button>
 </form>
